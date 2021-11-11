@@ -8,8 +8,7 @@
 | 4   | 기술 스택   |
 | 5   | 동작 시연   |
 
-![logo]('./logo.svg')
-<img src='./logo.svg' />
+<img src='./public/logo.svg' width='1000px' height='500px'/>
 
 ## 서비스 소개
 
