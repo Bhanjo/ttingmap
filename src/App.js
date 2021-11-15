@@ -1,6 +1,7 @@
-import Home from './components/Home'
+import Home from './components/Home';
 
 function App() {
+  console.log('dd');
   return (
     <>
       <Home />
