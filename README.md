@@ -29,8 +29,9 @@
 
 ## 기타 사항
 
+### 프로젝트 실행 에러 대처
 <details>
-  <summary>프로젝트 시작 babel에러</sommary>
+  <summary>babel 에러</summary>
   <div markdown='1'>
     There might be a problem with the project dependency tree.
     It is likely not a bug in Create React App, but something you need to fix locally.
@@ -84,3 +85,6 @@
 ```
 SKIP_PREFLIGHT_CHECK=true
 ```
+
+### 글꼴, 이미지 소스
+- [글꼴 [나눔고딕]](https://hangeul.naver.com/2021/fonts/nanum)
