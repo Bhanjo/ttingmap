@@ -72,12 +72,17 @@ const InfoImg = styled.img`
 
 const InfoList = styled.div`
   width: 1190px;
-  margin: auto 46px 240px;
+  margin: auto auto 240px;
+  div:nth-child(2n) {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 `;
 
 const InfoItem = styled.div`
   display: flex;
   margin: 83px 0;
+  overflow: hidden;
   :first-child,
   :last-child {
     margin: 0;
@@ -130,6 +135,7 @@ const ContactGithub = styled.img`
   cursor: pointer;
 `;
 
+// 각 파트별 컴포넌트를 분리시킬 필요가 있음
 const Home = () => {
   return (
     <>
@@ -148,17 +154,25 @@ const Home = () => {
           <p>띵맵으로 쉽고 간편하게!</p>
         </InfoTitle>
         <InfoList>
+          {/*
+            map 함수로 변경하기
+            창크기에 따른 배치방식 변경 고려 필요
+          */}
           <InfoItem>
             <InfoImg src='https://via.placeholder.com/594x362' />
             <p>대충 설명1</p>
           </InfoItem>
           <InfoItem>
             <InfoImg src='https://via.placeholder.com/594x362' />
-            <p>대충 설명1</p>
+            <p>대충 설명2</p>
           </InfoItem>
           <InfoItem>
             <InfoImg src='https://via.placeholder.com/594x362' />
-            <p>대충 설명1</p>
+            <p>대충 설명3</p>
+          </InfoItem>
+          <InfoItem>
+            <InfoImg src='https://via.placeholder.com/594x362' />
+            <p>대충 설명4</p>
           </InfoItem>
         </InfoList>
       </InfoBox>
