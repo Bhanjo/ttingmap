@@ -1,90 +1,70 @@
-# 띵맵
+# Getting Started with Create React App
 
-|     | 목차        |
-| --- | ----------- |
-| 1   | 서비스 소개 |
-| 2   | 사용기술    |
-| 3   | 핵심 기능   |
-| 4   | 기술 스택   |
-| 5   | 기타 사항   |
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<img src='./public/logo.svg' width='1000px' height='500px'/>
+## Available Scripts
 
-## 서비스 소개
+In the project directory, you can run:
 
-띵맵은 마인드 맵을 만들 수 있는 웹사이트입니다
+### `yarn start`
 
-[페이지 디자인](https://www.figma.com/file/pfrQPY21Q3AMi2Tev4OylE/Untitled?node-id=0%3A1)
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## 사용기술
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-- React
-- JavaScript
-- Styled-Component
-- React-Router-Dom
+### `yarn test`
 
-## 핵심 기능
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## 동작 시연
+### `yarn build`
 
-## 기타 사항
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### 프로젝트 실행 에러 대처
-<details>
-  <summary>babel 에러</summary>
-  <div markdown='1'>
-    There might be a problem with the project dependency tree.
-    It is likely not a bug in Create React App, but something you need to fix locally.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-    The react-scripts package provided by Create React App requires a dependency:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-    "babel-jest": "^26.6.0"
+### `yarn eject`
 
-    Don't try to install it manually: your package manager does it automatically.
-    However, a different version of babel-jest was detected higher up in the tree:
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-    C:\Users\Hanjo\coding\ttingmap\node_modules\babel-jest (version: 25.5.1)
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-    Manually installing incompatible versions is known to cause hard-to-debug issues.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-    If you would prefer to ignore this check, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
-    That will permanently disable this message but you might encounter other issues.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-    To fix the dependency tree, try following the steps below in the exact order:
+## Learn More
 
-    1. Delete package-lock.json (not package.json!) and/or yarn.lock in your project folder.
-    2. Delete node_modules in your project folder.
-    3. Remove "babel-jest" from dependencies and/or devDependencies in the package.json file in your project folder.
-    4. Run npm install or yarn, depending on the package manager you use.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-    In most cases, this should be enough to fix the problem.
-    If this has not helped, there are a few other things you can try:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-    5. If you used npm, install yarn (http://yarnpkg.com/) and repeat the above steps with it instead.
-        This may help because npm has known issues with package hoisting which may get resolved in future
-      versions.
+### Code Splitting
 
-    6. Check if C:\Users\Hanjo\coding\ttingmap\node_modules\babel-jest is outside your project directory. For example, you might have accidentally installed something in your home folder.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-    7. Try running npm ls babel-jest in your project folder.
-      This will tell you which other package (apart from the expected react-scripts) installed babel-jest.
+### Analyzing the Bundle Size
 
-    If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project.
-    That would permanently disable this preflight check in case you want to proceed anyway.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-    P.S. We know this message is long but please read the steps above :-) We hope you find them helpful!
+### Making a Progressive Web App
 
-    error Command failed with exit code 1.
-    info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-  </div>
-</details>
+### Advanced Configuration
 
-만약 해당 에러가 표시된다면 `.env`파일을 최상위 폴더에 생성 후 아래의 내용을 입력하세요
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-```
-SKIP_PREFLIGHT_CHECK=true
-```
+### Deployment
 
-### 글꼴, 이미지 소스
-- [글꼴 [나눔고딕]](https://hangeul.naver.com/2021/fonts/nanum)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

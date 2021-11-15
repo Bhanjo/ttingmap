@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "extends": ["react-app", "airbnb", "plugin:prettier/react"],
   "plugins": ["react-hooks"],
   "env": {
     "browser": true,
@@ -54,6 +54,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "react/function-component-definition": 0
   }
 }
