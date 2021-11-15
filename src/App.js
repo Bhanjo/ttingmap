@@ -1,12 +1,7 @@
 import Home from './components/Home';
 
-function App() {
-  console.log('dd');
-  return (
-    <>
-      <Home />
-    </>
-  );
-}
+const App = () => {
+  return <Home />;
+};
 
 export default App;
