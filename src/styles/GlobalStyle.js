@@ -3,10 +3,14 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
     ${reset};
+    @font-face {
+      font-family: 'NanumGothic';
+      src: url(${'/fonts/NanumGothicBold.otf'});
+    }
     body{
         padding: 0;
         margin: 0;
-        font-family: 'Noto Sans KR', sans-serif;
+        font-family: 'NanumGothic', sans-serif;
     };
     button{
         display: flex;
