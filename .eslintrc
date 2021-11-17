@@ -1,5 +1,6 @@
 {
-  "extends": ["react-app", "airbnb", "plugin:prettier/react"],
+  // prettier 에러가 발생하면 plugin을 plugin:prettier/react로 수정하세요
+  "extends": ["react-app", "airbnb", "plugin:prettier/recommended"],
   "plugins": ["react-hooks"],
   "env": {
     "browser": true,

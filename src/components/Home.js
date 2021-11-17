@@ -28,11 +28,28 @@ const Brand = styled.img`
   height: 162px;
 `;
 
-const StartButton = styled.img`
+const StartButton = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 192px;
   height: 46px;
   margin-top: 18px;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
+  font-size: 30px;
+  color: #ffffff;
+  border: 3px #fff solid;
+  border-radius: 18px;
+
+  /* Button animaition */
+  box-shadow: inset 0 0 0 0 #80ffd3;
+  transition: all 0.7s cubic-bezier(.9, .24, 0.40, 1);
+  :hover {
+    box-shadow: inset 00px 100px 0px 0px #898bff;
+    color: #ffffff;
+  }
 `;
 
 const Scroll = styled.img`
@@ -143,7 +160,7 @@ const Home = () => {
       <WelcomContainer>
         <BrandBox>
           <Brand src='../svg/welcomLogo.svg' />
-          <StartButton src='../svg/startButton.svg' />
+          <StartButton>start</StartButton>
         </BrandBox>
         <Scroll src='../svg/scroll.svg' />
       </WelcomContainer>
