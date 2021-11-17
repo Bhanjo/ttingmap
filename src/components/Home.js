@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // 첫 로딩시 보여줄 화면
 const WelcomContainer = styled.div`
@@ -41,22 +41,34 @@ const StartButton = styled.p`
   font-size: 30px;
   color: #ffffff;
   border: 3px #fff solid;
-  border-radius: 18px;
+  border-radius: 24px;
 
   /* Button animaition */
   box-shadow: inset 0 0 0 0 #80ffd3;
   transition: all 0.7s cubic-bezier(.9, .24, 0.40, 1);
   :hover {
-    box-shadow: inset 00px 100px 0px 0px #898bff;
+    box-shadow: inset 00px 100px 0px 0px #5d5fef;
     color: #ffffff;
+    border: 3px #898bff solid;
   }
 `;
 
+const fadeDown = keyframes`
+  0%{
+    opacity: 0;
+    bottom: 20px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 15px;
+  }`;
+
 const Scroll = styled.img`
+  /* animation: ${fadeDown} 1s infinite linear alternate; */
   position: absolute;
-  width: 100px;
-  height: 100px;
-  bottom: 0;
+  width: 25px;
+  height: 25px;
+  bottom: 15px;
 `;
 
 // 설명파트
@@ -118,7 +130,7 @@ const MoveBox = styled.div`
   background-size: cover;
   p {
     color: #fff;
-    font-size: 48px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 19px;
   }
@@ -196,7 +208,7 @@ const Home = () => {
       {/* 마인드맵 이동 컴포넌트 */}
       <MoveBox>
         <p>지금 바로 시작하기</p>
-        <StartButton src='../svg/startButton.svg' />
+        <StartButton>start</StartButton>
       </MoveBox>
       {/* 컨택트 컴포넌트 */}
       <Contact>
