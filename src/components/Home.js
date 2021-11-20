@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
+import useScrollAnimation from '../hooks/useScrollAnimation';
+
 // 첫 로딩시 보여줄 화면
 const WelcomContainer = styled.div`
   display: flex;
@@ -45,12 +47,15 @@ const StartButton = styled.p`
 
   /* Button animaition */
   box-shadow: inset 0 0 0 0 #80ffd3;
-  transition: all 0.7s cubic-bezier(.9, .24, 0.40, 1);
+  transition: all 0.7s cubic-bezier(0.9, 0.24, 0.4, 1);
+  background: url('../svg/gradation.svg');
+  background-size: cover;
   :hover {
-    box-shadow: inset 00px 100px 0px 0px #5d5fef;
-    color: #ffffff;
-    border: 3px #898bff solid;
+    box-shadow: inset 0 0 500px 0 #38399e00;
+    /* color: #ffffff; */
   }
+
+  /* background: linear-gradient(to bottom, red, blue); */
 `;
 
 const fadeDown = keyframes`
@@ -73,7 +78,7 @@ const Scroll = styled.img`
 
 // 설명파트
 const InfoBox = styled.div`
-  min-width: 100%;
+  /* min-width: 100%; */
   background-color: #fff;
 `;
 
@@ -120,12 +125,6 @@ const InfoItem = styled.div`
 
 // 마인드맵 이동 파트
 const MoveBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 400px;
   background-image: url('../svg/gradation.svg');
   background-size: cover;
   p {
@@ -134,6 +133,15 @@ const MoveBox = styled.div`
     font-weight: bold;
     margin-bottom: 19px;
   }
+`;
+
+const MoveBoxInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
 `;
 
 // 연락정보 파트
@@ -166,6 +174,16 @@ const ContactGithub = styled.img`
 
 // 각 파트별 컴포넌트를 분리시킬 필요가 있음
 const Home = () => {
+  // 애니메이션 요소 하나당 hooks 하나를 써야됨 => 개선방안 고민필요
+  const animation = {
+    0: useScrollAnimation('up', 1.5),
+    1: useScrollAnimation('left', 1.5, 0.2),
+    2: useScrollAnimation('right', 1.5, 0.2),
+    3: useScrollAnimation('left', 1.5, 0.2),
+    4: useScrollAnimation('right', 1.5, 0.2),
+    5: useScrollAnimation('up', 1, 0.2),
+  };
+
   return (
     <>
       {/* 로딩시 보여줄 컴포넌트 */}
@@ -178,7 +196,7 @@ const Home = () => {
       </WelcomContainer>
       {/* 마인드맵 설명 컴포넌트 */}
       <InfoBox>
-        <InfoTitle>
+        <InfoTitle {...animation[0]}>
           <p>생각을 펼치고 싶다면?</p>
           <p>띵맵으로 쉽고 간편하게!</p>
         </InfoTitle>
@@ -187,19 +205,19 @@ const Home = () => {
             map 함수로 변경하기
             창크기에 따른 배치방식 변경 고려 필요
           */}
-          <InfoItem>
+          <InfoItem {...animation[1]}>
             <InfoImg src='https://via.placeholder.com/594x362' />
             <p>대충 설명1</p>
           </InfoItem>
-          <InfoItem>
+          <InfoItem {...animation[2]}>
             <InfoImg src='https://via.placeholder.com/594x362' />
             <p>대충 설명2</p>
           </InfoItem>
-          <InfoItem>
+          <InfoItem {...animation[3]}>
             <InfoImg src='https://via.placeholder.com/594x362' />
             <p>대충 설명3</p>
           </InfoItem>
-          <InfoItem>
+          <InfoItem {...animation[4]}>
             <InfoImg src='https://via.placeholder.com/594x362' />
             <p>대충 설명4</p>
           </InfoItem>
@@ -207,8 +225,10 @@ const Home = () => {
       </InfoBox>
       {/* 마인드맵 이동 컴포넌트 */}
       <MoveBox>
-        <p>지금 바로 시작하기</p>
-        <StartButton>start</StartButton>
+        <MoveBoxInner {...animation[5]}>
+          <p>지금 바로 시작하기</p>
+          <StartButton>start</StartButton>
+        </MoveBoxInner>
       </MoveBox>
       {/* 컨택트 컴포넌트 */}
       <Contact>
