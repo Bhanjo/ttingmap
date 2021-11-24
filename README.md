@@ -23,6 +23,7 @@
 - Styled-Component
 - Styled-reset
 - React-Router-Dom
+- Cytoscape
 
 ## 핵심 기능
 
@@ -31,4 +32,5 @@
 ## 기타 사항
 
 ### 글꼴, 이미지 소스
+
 - [글꼴 [나눔고딕]](https://hangeul.naver.com/2021/fonts/nanum)
