@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 import useScrollAnimation from '../hooks/useScrollAnimation';
@@ -30,7 +31,7 @@ const Brand = styled.img`
   height: 162px;
 `;
 
-const StartButton = styled.p`
+const StartButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,6 +45,7 @@ const StartButton = styled.p`
   color: #ffffff;
   border: 3px #fff solid;
   border-radius: 24px;
+  text-decoration-line: none;
 
   /* Button animaition */
   box-shadow: inset 0 0 0 0 #80ffd3;
@@ -190,7 +192,7 @@ const Home = () => {
       <WelcomContainer>
         <BrandBox>
           <Brand src='../svg/welcomLogo.svg' />
-          <StartButton>start</StartButton>
+          <StartButton to='/mindmap'>start</StartButton>
         </BrandBox>
         <Scroll src='../svg/scroll.svg' />
       </WelcomContainer>
@@ -227,7 +229,7 @@ const Home = () => {
       <MoveBox>
         <MoveBoxInner {...animation[5]}>
           <p>지금 바로 시작하기</p>
-          <StartButton>start</StartButton>
+          <StartButton to='/mindmap'>start</StartButton>
         </MoveBoxInner>
       </MoveBox>
       {/* 컨택트 컴포넌트 */}
