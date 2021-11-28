@@ -28,8 +28,8 @@
 ## 핵심 기능
 
 - 그래프 표현(cytoscape)
-  - [cytoscape]('https://js.cytoscape.org/')
-  - [react-cytoscape]('https://github.com/plotly/react-cytoscapejs')
+  - [cytoscape](https://js.cytoscape.org/)
+  - [react-cytoscape](https://github.com/plotly/react-cytoscapejs)
 
 ## 동작 시연
 
