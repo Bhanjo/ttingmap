@@ -3,34 +3,21 @@ import styled from 'styled-components';
 
 // Cytoscape에 대한 스타일
 const GraphBox = styled(CytoscapeComponent)`
-  width: 1000px;
-  height: 500px;
+  width: 1280px;
+  height: 80vh;
   border: 1px solid #000;
+  background-color: #fff;
 `;
 
-const Cytoscape = () => {
-  const elements = [
-    {
-      data: {
-        id: 'one',
-        label: 'Node 1',
-      },
-    },
-    {
-      data: {
-        id: 'two',
-        label: 'Node 2',
-      },
-    },
-    {
-      data: {
-        source: 'one',
-        target: 'two',
-        label: 'edge from node1 to node2',
-      },
-    },
-  ];
-  return <GraphBox elements={elements} />;
+const Cytoscape = ({ elements }) => {
+  // normalizeElements를 통해 쉽게 elements를 JSON 형태로 보내줄 수 있다
+  return (
+    <GraphBox
+      elements={CytoscapeComponent.normalizeElements(elements)}
+      maxZoom={8}
+      minZoom={0.3}
+    />
+  );
 };
 
 export default Cytoscape;
