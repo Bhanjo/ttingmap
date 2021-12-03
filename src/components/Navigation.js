@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NavContainer = styled.div`
-  position: fixed;
-  z-index: 10;
+  /* position: fixed;
+  z-index: 10; */
   display: flex;
   align-items: center;
   padding: 10px 50px;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // Cytoscape에 대한 스타일
 const GraphBox = styled(CytoscapeComponent)`
-  width: 1280px;
+  width: inherit;
   height: 80vh;
   border: 1px solid #000;
   background-color: #fff;
@@ -14,7 +14,7 @@ const Cytoscape = ({ elements }) => {
   return (
     <GraphBox
       elements={CytoscapeComponent.normalizeElements(elements)}
-      maxZoom={8}
+      maxZoom={2}
       minZoom={0.3}
     />
   );

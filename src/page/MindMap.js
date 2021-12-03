@@ -8,7 +8,9 @@ import Navigation from '../components/Navigation';
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #222;
+  min-height: 500px;
+  /* overflow: hidden; */
+  background-color: #c4c4c4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,7 +115,7 @@ const MindMap = () => {
       />
       {/* <CytoscapeInsert onNewGraph={onNewGraph} /> */}
       {/* 새로운노드입력 */}
-      <p>입력컴포넌트</p>
+      <p>입력테스트컴포넌트</p>
       <form onSubmit={onNewGraph}>
         <InputGraph
           type='text'
@@ -122,11 +124,11 @@ const MindMap = () => {
           onChange={onChangeNewNode}
         />
         {/* <InputGraph
-            type='text'
-            placeholder='연결할 노드를 입력하세요(ex: Node1)'
-            value={targetNode}
-            onChange={onChangeTargetNode}
-          /> */}
+          type='text'
+          placeholder='연결할 노드를 입력하세요(ex: Node1)'
+          value={targetNode}
+          onChange={onChangeTargetNode}
+        /> */}
         <button type='submit' label='test'>
           생성
         </button>
