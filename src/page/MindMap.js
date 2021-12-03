@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Cytoscape from '../components/Cytoscape';
 import CytoscapeInsert from '../components/CytoscapeInsert';
+import Navigation from '../components/Navigation';
 
 const Container = styled.div`
   width: 100%;
@@ -103,6 +104,7 @@ const MindMap = () => {
   // 노드 연결 기능 구현필요
   return (
     <Container>
+      <Navigation />
       <h1>자유롭게 생각을 표현하세요!</h1>
       <Cytoscape
         elements={elements}
@@ -120,11 +122,11 @@ const MindMap = () => {
           onChange={onChangeNewNode}
         />
         {/* <InputGraph
-          type='text'
-          placeholder='연결할 노드를 입력하세요(ex: Node1)'
-          value={targetNode}
-          onChange={onChangeTargetNode}
-        /> */}
+            type='text'
+            placeholder='연결할 노드를 입력하세요(ex: Node1)'
+            value={targetNode}
+            onChange={onChangeTargetNode}
+          /> */}
         <button type='submit' label='test'>
           생성
         </button>

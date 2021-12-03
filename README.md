@@ -16,6 +16,13 @@
 
 [페이지 디자인](https://www.figma.com/file/pfrQPY21Q3AMi2Tev4OylE/Untitled?node-id=0%3A1)
 
+### 구현 현황
+
+- [X] 메인 페이지 디자인, 구현
+- [ ] 그래프 CRUD 기능(추가 기능 완성)
+- [ ] Local Storage에 데이터 저장
+- [ ] 마인드 맵 export 기능 구현
+
 ## 사용기술
 
 - React
@@ -30,6 +37,9 @@
 - 그래프 표현(cytoscape)
   - [cytoscape](https://js.cytoscape.org/)
   - [react-cytoscape](https://github.com/plotly/react-cytoscapejs)
+
+- 그래프 저장
+  - [LocalStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
 
 ## 동작 시연
 
