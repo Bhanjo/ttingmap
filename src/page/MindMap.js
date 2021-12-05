@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
+import cy from 'react-cytoscapejs';
 import styled from 'styled-components';
 
 import Cytoscape from '../components/Cytoscape';
@@ -55,6 +56,9 @@ const MindMap = () => {
     },
   ]);
 
+  // 노드 추가일지 연결일지 판단, 기본값(true)은 노드 추가 기능
+  const [insertType, setInsertType] = useState(true);
+
   const [newNode, setNewNode] = useState('');
   const [targetNode, setTargetNode] = useState('');
 
@@ -65,7 +69,7 @@ const MindMap = () => {
     setTargetNode(e.target.value);
   };
 
-  // props로 함수를 전달시 useCallback을 쓰는게 맞는지?
+  // props로 함수를 전달시 useCallback을 쓰는게 맞는가
   const onNewGraph = useCallback(
     (e) => {
       const item = {
@@ -80,28 +84,36 @@ const MindMap = () => {
       };
       setElements(elements.concat(item));
       e.preventDefault();
+      setNewNode('');
     },
     [elements, newNode],
   );
 
-  // const onConnectGraph = useCallback(
-  //   (sourceNode, targetNode) => {
-  //     const newConnect = {
-  //       data: {
-  //         souce: sourceNode,
-  //         target: targetNode,
-  //         label: `edge from ${sourceNode} to ${targetNode}`,
-  //       },
-  //     };
-  //     setElements(elements.concat(newConnect));
-  //   },
-  //   [elements],
-  // );
+  const onConnectGraph = useCallback(
+    (e) => {
+      const newConnect = {
+        data: {
+          source: newNode,
+          target: targetNode,
+          label: `edge from ${newNode} to ${targetNode}`,
+        },
+      };
+      setElements(elements.concat(newConnect));
+      e.preventDefault();
+      setNewNode('');
+      setTargetNode('');
+      // eslint-disable-next-line no-console
+      console.log('노드추가됨');
+    },
+    [elements, newNode, targetNode],
+  );
 
-  // const onInsertGraph = (sourceNode, targetNode) => {
-  //   onNewGraph(sourceNode);
-  //   onConnectGraph(sourceNode, targetNode);
-  // };
+  // 입력모드 변경 이벤트
+  const changeInsertMode = () => {
+    setNewNode('');
+    setTargetNode('');
+    setInsertType(!insertType);
+  };
 
   // 노드 연결 기능 구현필요
   return (
@@ -113,26 +125,45 @@ const MindMap = () => {
         // onNewGraph={onNewGraph}
         // onConnectGraph={onConnectGraph}
       />
-      {/* <CytoscapeInsert onNewGraph={onNewGraph} /> */}
-      {/* 새로운노드입력 */}
-      <p>입력테스트컴포넌트</p>
-      <form onSubmit={onNewGraph}>
-        <InputGraph
-          type='text'
-          placeholder='추가할 노드의 이름을 입력하세요'
-          value={newNode}
-          onChange={onChangeNewNode}
-        />
-        {/* <InputGraph
-          type='text'
-          placeholder='연결할 노드를 입력하세요(ex: Node1)'
-          value={targetNode}
-          onChange={onChangeTargetNode}
-        /> */}
-        <button type='submit' label='test'>
-          생성
+      <div>
+        <h1>입력 타입 선택</h1>
+        <button type='button' onClick={changeInsertMode}>
+          모드변경하기
         </button>
-      </form>
+      </div>
+      {insertType ? (
+        // 신규노드추가
+        <form onSubmit={onNewGraph}>
+          <InputGraph
+            type='text'
+            placeholder='추가할 노드의 이름을 입력하세요'
+            value={newNode}
+            onChange={onChangeNewNode}
+          />
+          <button type='submit' label='test'>
+            추가하기
+          </button>
+        </form>
+      ) : (
+        // 노드연결하기
+        <form onSubmit={onConnectGraph}>
+          <InputGraph
+            type='text'
+            placeholder='시작노드'
+            value={newNode}
+            onChange={onChangeNewNode}
+          />
+          <InputGraph
+            type='text'
+            placeholder='타겟노드'
+            value={targetNode}
+            onChange={onChangeTargetNode}
+          />
+          <button type='submit' label='test'>
+            연결하기
+          </button>
+        </form>
+      )}
     </Container>
   );
 };
