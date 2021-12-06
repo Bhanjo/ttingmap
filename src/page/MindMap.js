@@ -33,35 +33,39 @@ const InputGraph = styled.input`
 
 const MindMap = () => {
   // 초기값
-  const elements = [
-    {
-      data: {
-        id: 'Node 1',
-        label: 'Node 1',
+  const elements = {
+    nodes: [
+      {
+        data: {
+          id: 'Node 1',
+          label: 'Node 1',
+        },
+        position: {
+          x: 640,
+          y: 360,
+        },
       },
-      position: {
-        x: 640,
-        y: 360,
+      {
+        data: {
+          id: 'Node 3',
+          label: 'Node 3',
+        },
+        position: {
+          x: 540,
+          y: 360,
+        },
       },
-    },
-    {
-      data: {
-        id: 'Node 3',
-        label: 'Node 3',
+    ],
+    edges: [
+      {
+        data: {
+          source: 'Node 1',
+          target: 'Node 3',
+          label: 'edge from node1 to node3',
+        },
       },
-      position: {
-        x: 540,
-        y: 360,
-      },
-    },
-    {
-      data: {
-        source: 'Node 1',
-        target: 'Node 3',
-        label: 'edge from node1 to node3',
-      },
-    },
-  ];
+    ],
+  };
   // cytoscape DOM을 다루기 위한 ref
   const cyRef = useRef();
 
@@ -107,6 +111,7 @@ const MindMap = () => {
     };
     // setElements(elements.concat(newConnect));
     e.preventDefault();
+    cyRef.current.add(newConnect);
     setNewNode('');
     setTargetNode('');
   };
