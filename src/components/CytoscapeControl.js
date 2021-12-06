@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+const ControlContainer = styled.div`
+  background-color: #fff;
+  /* position: fixed; */
+  position: absolute;
+  top: 50px;
+  right: 0;
+`;
+
 const InputGraph = styled.input`
   width: 300px;
 `;
 
-const CytoscapeInsert = ({ cyRef }) => {
+const CytoscapeControl = ({ cyRef }) => {
   // 노드 추가,연결 모드, 기본값(true)은 노드 추가 기능
   const [insertType, setInsertType] = useState(true);
 
@@ -59,9 +67,9 @@ const CytoscapeInsert = ({ cyRef }) => {
     setInsertType(!insertType);
   };
   return (
-    <>
+    <ControlContainer>
       <div>
-        <h1>입력 타입 선택</h1>
+        <h1>생성</h1>
         <button type='button' onClick={changeInsertMode}>
           모드변경하기
         </button>
@@ -84,13 +92,13 @@ const CytoscapeInsert = ({ cyRef }) => {
         <form onSubmit={onConnectGraph}>
           <InputGraph
             type='text'
-            placeholder='시작노드'
+            placeholder='시작요소'
             value={newNode}
             onChange={onChangeNewNode}
           />
           <InputGraph
             type='text'
-            placeholder='타겟노드'
+            placeholder='타겟요소'
             value={targetNode}
             onChange={onChangeTargetNode}
           />
@@ -99,8 +107,8 @@ const CytoscapeInsert = ({ cyRef }) => {
           </button>
         </form>
       )}
-    </>
+    </ControlContainer>
   );
 };
 
-export default CytoscapeInsert;
+export default CytoscapeControl;

@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { useRef } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
 import styled from 'styled-components';
 
@@ -6,25 +6,16 @@ import CytoscapeControl from '../components/CytoscapeControl';
 import Navigation from '../components/Navigation';
 
 const Container = styled.div`
-  width: 100%;
   height: 100vh;
-  min-height: 500px;
-  background-color: #c4c4c4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h1 {
-    margin-top: 3rem;
-    color: #fff;
-  }
+  overflow: hidden;
 `;
 
 // Cytoscape에 대한 스타일
 const GraphBox = styled(CytoscapeComponent)`
-  width: inherit;
-  height: 80vh;
-  border: 1px solid #000;
-  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+  /* border: 1px solid #000; */
+  background-color: #ddd;
 `;
 
 const MindMap = () => {
@@ -69,7 +60,6 @@ const MindMap = () => {
   return (
     <Container>
       <Navigation />
-      <h1>자유롭게 생각을 표현하세요!</h1>
       <GraphBox
         elements={CytoscapeComponent.normalizeElements(elements)}
         maxZoom={2}
