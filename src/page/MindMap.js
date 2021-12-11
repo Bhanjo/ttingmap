@@ -8,6 +8,7 @@ import Navigation from '../components/Navigation';
 const Container = styled.div`
   height: 100vh;
   overflow: hidden;
+  position: relative;
 `;
 
 // Cytoscape에 대한 스타일

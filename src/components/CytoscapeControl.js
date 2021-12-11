@@ -1,12 +1,24 @@
-import { useState } from 'react';
+/* eslint-disable no-alert */
+/* eslint-disable no-console */
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const ControlContainer = styled.div`
   background-color: #fff;
-  /* position: fixed; */
   position: absolute;
   top: 50px;
   right: 0;
+  height: 100vh;
+  padding-top: 1rem;
+`;
+
+const ControlCategory = styled.ul`
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  li {
+    margin: 0 0.5rem;
+  }
 `;
 
 const InputGraph = styled.input`
@@ -14,11 +26,12 @@ const InputGraph = styled.input`
 `;
 
 const CytoscapeControl = ({ cyRef }) => {
-  // 노드 추가,연결 모드, 기본값(true)은 노드 추가 기능
+  // 노드 추가: add, 연결: edge, 노드삭제: delNode, 간선삭제: delEdge, 노드 수정: modify
   const [insertType, setInsertType] = useState(true);
-
   const [newNode, setNewNode] = useState('');
   const [targetNode, setTargetNode] = useState('');
+  // const isExist = useRef(true);
+  let isExist = false;
 
   // form 내용 변경 감지
   const onChangeNewNode = (e) => {
@@ -26,6 +39,24 @@ const CytoscapeControl = ({ cyRef }) => {
   };
   const onChangeTargetNode = (e) => {
     setTargetNode(e.target.value);
+  };
+
+  // 존재유무판단 구현하기
+  const insertIsExist = (...item) => {
+    if (item.length === 1) {
+      if (cyRef.current.getElementById(item[0].data.id).length === 0) {
+        isExist = true;
+      } else {
+        isExist = false;
+      }
+    } else if (item.length === 2) {
+      isExist = true;
+      item.forEach((node) => {
+        if (cyRef.current.getElementById(node).length === 0) {
+          isExist = false;
+        }
+      });
+    }
   };
 
   // 노드 추가 이벤트
@@ -41,7 +72,12 @@ const CytoscapeControl = ({ cyRef }) => {
       },
     };
     e.preventDefault();
-    cyRef.current.add(item);
+    insertIsExist(item);
+    if (isExist) {
+      cyRef.current.add(item);
+    } else {
+      alert(`${item.data.id}은/는 이미 존재합니다`);
+    }
     setNewNode('');
   };
 
@@ -55,9 +91,14 @@ const CytoscapeControl = ({ cyRef }) => {
       },
     };
     e.preventDefault();
-    cyRef.current.add(newConnect);
-    setNewNode('');
-    setTargetNode('');
+    insertIsExist(newNode, targetNode);
+    if (isExist) {
+      cyRef.current.add(newConnect);
+      setNewNode('');
+      setTargetNode('');
+    } else {
+      alert(`입력값을 다시 확인해주세요`);
+    }
   };
 
   // 입력모드 변경 이벤트
@@ -69,7 +110,17 @@ const CytoscapeControl = ({ cyRef }) => {
   return (
     <ControlContainer>
       <div>
-        <h1>생성</h1>
+        <ControlCategory>
+          <li>
+            <p>생성</p>
+          </li>
+          <li>
+            <p>수정</p>
+          </li>
+          <li>
+            <p>삭제</p>
+          </li>
+        </ControlCategory>
         <button type='button' onClick={changeInsertMode}>
           모드변경하기
         </button>
