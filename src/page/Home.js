@@ -54,10 +54,7 @@ const StartButton = styled(Link)`
   background-size: cover;
   :hover {
     box-shadow: inset 0 0 500px 0 #38399e00;
-    /* color: #ffffff; */
   }
-
-  /* background: linear-gradient(to bottom, red, blue); */
 `;
 
 const fadeDown = keyframes`
@@ -179,12 +176,31 @@ const Home = () => {
   // 애니메이션 요소 하나당 hooks 하나를 써야됨 => 개선방안 고민필요
   const animation = {
     0: useScrollAnimation('up', 1.5),
-    1: useScrollAnimation('left', 1.5, 0.2),
-    2: useScrollAnimation('right', 1.5, 0.2),
-    3: useScrollAnimation('left', 1.5, 0.2),
-    4: useScrollAnimation('right', 1.5, 0.2),
-    5: useScrollAnimation('up', 1, 0.2),
+    1: useScrollAnimation('up', 1, 0.2),
   };
+
+  const projectIntroduce = [
+    {
+      animation: useScrollAnimation('left', 1.5, 0.2),
+      projectImg: 'https://via.placeholder.com/594x362',
+      introduceText: '대충설명1',
+    },
+    {
+      animation: useScrollAnimation('right', 1.5, 0.2),
+      projectImg: 'https://via.placeholder.com/594x362',
+      introduceText: '대충설명2',
+    },
+    {
+      animation: useScrollAnimation('left', 1.5, 0.2),
+      projectImg: 'https://via.placeholder.com/594x362',
+      introduceText: '대충설명3',
+    },
+    {
+      animation: useScrollAnimation('right', 1.5, 0.2),
+      projectImg: 'https://via.placeholder.com/594x362',
+      introduceText: '대충설명4',
+    },
+  ];
 
   return (
     <>
@@ -203,31 +219,17 @@ const Home = () => {
           <p>띵맵으로 쉽고 간편하게!</p>
         </InfoTitle>
         <InfoList>
-          {/*
-            map 함수로 변경하기
-            창크기에 따른 배치방식 변경 고려 필요
-          */}
-          <InfoItem {...animation[1]}>
-            <InfoImg src='https://via.placeholder.com/594x362' />
-            <p>대충 설명1</p>
-          </InfoItem>
-          <InfoItem {...animation[2]}>
-            <InfoImg src='https://via.placeholder.com/594x362' />
-            <p>대충 설명2</p>
-          </InfoItem>
-          <InfoItem {...animation[3]}>
-            <InfoImg src='https://via.placeholder.com/594x362' />
-            <p>대충 설명3</p>
-          </InfoItem>
-          <InfoItem {...animation[4]}>
-            <InfoImg src='https://via.placeholder.com/594x362' />
-            <p>대충 설명4</p>
-          </InfoItem>
+          {projectIntroduce.map((introduce) => (
+            <InfoItem {...introduce.animation}>
+              <InfoImg src={introduce.projectImg} />
+              <p>{introduce.introduceText}</p>
+            </InfoItem>
+          ))}
         </InfoList>
       </InfoBox>
       {/* 마인드맵 이동 컴포넌트 */}
       <MoveBox>
-        <MoveBoxInner {...animation[5]}>
+        <MoveBoxInner {...animation[1]}>
           <p>지금 바로 시작하기</p>
           <StartButton to='/mindmap'>start</StartButton>
         </MoveBoxInner>

@@ -13,9 +13,9 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'NanumGothic', sans-serif;
 
         /* 스크롤바 숨김(특정브라우저한정) */
-        &::-webkit-scrollbar {
-        display: none;
-  }
+        /* &::-webkit-scrollbar {
+          display: none;
+        } */
     };
     a{
       color: inherit;
