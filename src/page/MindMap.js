@@ -43,12 +43,73 @@ const MindMap = () => {
           y: 360,
         },
       },
+      {
+        data: {
+          id: '1',
+          label: '1',
+        },
+        position: {
+          x: 340,
+          y: 360,
+        },
+      },
+      {
+        data: {
+          id: '2',
+          label: '2',
+        },
+        position: {
+          x: 440,
+          y: 360,
+        },
+      },
+      {
+        data: {
+          id: '3',
+          label: '3',
+        },
+        position: {
+          x: 140,
+          y: 360,
+        },
+      },
+      {
+        data: {
+          id: '4',
+          label: '4',
+        },
+        position: {
+          x: 240,
+          y: 360,
+        },
+      },
     ],
     edges: [
       {
         data: {
           source: 'Node 1',
           target: 'Node 3',
+          label: 'edge from node1 to node3',
+        },
+      },
+      {
+        data: {
+          source: '1',
+          target: '2',
+          label: 'edge from node1 to node3',
+        },
+      },
+      {
+        data: {
+          source: '1',
+          target: '3',
+          label: 'edge from node1 to node3',
+        },
+      },
+      {
+        data: {
+          source: '1',
+          target: '4',
           label: 'edge from node1 to node3',
         },
       },
