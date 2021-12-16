@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 
-const NodeRemove = ({ cyRef }) => {
+const NodeDelete = ({ cyRef }) => {
   const [removeNode, setRemoveNode] = useState('');
   const [targetNode, setTargetNode] = useState('');
   const [removeType, setRemoveType] = useState(true);
@@ -78,4 +78,4 @@ const NodeRemove = ({ cyRef }) => {
   );
 };
 
-export default NodeRemove;
+export default NodeDelete;

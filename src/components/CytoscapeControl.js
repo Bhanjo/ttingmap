@@ -2,13 +2,15 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import NodeCreate from './graphControls/NodeCreate';
-import NodeRemove from './graphControls/NodeRemove';
+import NodeDelete from './graphControls/NodeDelete';
+import NodeUpdate from './graphControls/NodeUpdate';
 
 const ControlContainer = styled.div`
   background-color: #fff;
   position: absolute;
   top: 50px;
   right: 0;
+  width: 250px;
   height: 100vh;
   padding-top: 1rem;
 `;
@@ -28,8 +30,8 @@ const CytoscapeControl = ({ cyRef }) => {
   // 전체 컨트롤 모드
   const [controlModes, setControlModes] = useState([
     { name: '생성', mode: 'create' },
-    { name: '수정', mode: 'modify' },
-    { name: '삭제', mode: 'remove' },
+    { name: '수정', mode: 'update' },
+    { name: '삭제', mode: 'delete' },
   ]);
   const [currentMode, setCurrentMode] = useState('create');
 
@@ -53,7 +55,8 @@ const CytoscapeControl = ({ cyRef }) => {
       </div>
       <div>
         {currentMode === 'create' && <NodeCreate cyRef={cyRef} />}
-        {currentMode === 'remove' && <NodeRemove cyRef={cyRef} />}
+        {currentMode === 'delete' && <NodeDelete cyRef={cyRef} />}
+        {currentMode === 'update' && <NodeUpdate cyRef={cyRef} />}
       </div>
     </ControlContainer>
   );

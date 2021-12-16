@@ -50,7 +50,7 @@ const MindMap = () => {
         },
         position: {
           x: 340,
-          y: 360,
+          y: 250,
         },
       },
       {

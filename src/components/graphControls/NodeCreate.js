@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const InputGraph = styled.input`
-  width: 300px;
+  /* width: 300px; */
 `;
 
 const NodeCreate = ({ cyRef }) => {
@@ -23,7 +23,7 @@ const NodeCreate = ({ cyRef }) => {
   // 존재유무판단
   const insertIsExist = (...item) => {
     if (item.length === 1) {
-      if (cyRef.current.getElementById(item[0].data.id).length === 0) {
+      if (cyRef.current.getElementById(item[0].data.label).length === 0) {
         isExist = true;
       } else {
         isExist = false;
