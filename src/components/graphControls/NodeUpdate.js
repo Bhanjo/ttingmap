@@ -1,16 +1,29 @@
 /* eslint-disable no-console */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+
+import nodeInputState from '../globalState/nodeControl';
 
 const NodeDelete = ({ cyRef }) => {
-  const [updateNode, setUpdateNode] = useState('');
+  const [updateNode, setUpdateNode] = useRecoilState(nodeInputState);
   const [updateName, setUpdateName] = useState('');
   const [updateType, setUpdateType] = useState(true);
 
-  const onChangeUpdateNode = (e) => {
-    setUpdateNode(e.target.value);
-  };
   const onChangeUpdateName = (e) => {
     setUpdateName(e.target.value);
+  };
+
+  useEffect(() => {
+    // 노드 클릭 이벤트
+    cyRef.current.on('tap', 'node', (e) => {
+      const node = e.target;
+      setUpdateNode(node.id());
+      console.log(node.data().label);
+    });
+  }, [cyRef, setUpdateNode]);
+
+  const onChangeUpdateNode = (e) => {
+    setUpdateNode(e.target.value);
   };
 
   const changeMode = () => {
@@ -23,11 +36,10 @@ const NodeDelete = ({ cyRef }) => {
   const onUpdateNode = (e) => {
     e.preventDefault();
     const findNode = cyRef.current.$(`[id = "${updateNode}"]`);
-    findNode.data('id', updateName);
     findNode.data('label', updateName);
     setUpdateNode('');
     setUpdateName('');
-    console.log(cyRef.current.$('*'));
+    // console.log(cyRef.current.$('*'));
   };
 
   return (
@@ -37,11 +49,13 @@ const NodeDelete = ({ cyRef }) => {
       </button>
       {updateType ? (
         <form onSubmit={onUpdateNode}>
+          <p>바꿀 노드 id: {updateNode} </p>
           <input
             type='text'
             value={updateNode}
             onChange={onChangeUpdateNode}
             placeholder='수정할 노드 이름'
+            hidden='hidden'
           />
           <input
             type='text'

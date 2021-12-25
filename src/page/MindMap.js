@@ -116,16 +116,9 @@ const MindMap = () => {
       },
     ],
   };
+
   // cytoscape DOM을 다루기 위한 ref
   const cyRef = useRef();
-
-  useEffect(() => {
-    // node click event
-    cyRef.current.on('tap', 'node', (evt) => {
-      const node = evt.target;
-      console.log(`tapped ${node.id()}`);
-    });
-  }, [cyRef]);
 
   // 노드 연결 기능 구현필요
   return (
