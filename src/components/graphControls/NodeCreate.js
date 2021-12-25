@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const InputGraph = styled.input`
@@ -10,7 +11,10 @@ const NodeCreate = ({ cyRef }) => {
   const [insertType, setInsertType] = useState(true);
   const [newNode, setNewNode] = useState('');
   const [targetNode, setTargetNode] = useState('');
-  let isExist = false;
+  const nodeIdCounter = useRef(5);
+
+  // let isExist = false;
+  let isExist = true;
 
   // form 내용 변경 감지
   const onChangeNewNode = (e) => {
@@ -42,7 +46,7 @@ const NodeCreate = ({ cyRef }) => {
   const onNewGraph = (e) => {
     const item = {
       data: {
-        id: newNode,
+        id: nodeIdCounter.current,
         label: newNode,
       },
       position: {
@@ -51,12 +55,8 @@ const NodeCreate = ({ cyRef }) => {
       },
     };
     e.preventDefault();
-    insertIsExist(item);
-    if (isExist) {
-      cyRef.current.add(item);
-    } else {
-      alert(`${item.data.id}은/는 이미 존재합니다`);
-    }
+    cyRef.current.add(item);
+    nodeIdCounter.current += 1;
     setNewNode('');
   };
 
