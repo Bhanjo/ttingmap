@@ -42,9 +42,23 @@
   - [LocalStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
 
 ## 동작 시연
+### [21.12.29]
+
+### Read
+![exRead](https://user-images.githubusercontent.com/63037629/147388362-94afa79a-a21e-4311-993e-838e7154968a.gif)
+
+### Create
+![exCreate](https://user-images.githubusercontent.com/63037629/147388368-3bf56eec-4dae-4e64-9b6d-ba5eb8de33ec.gif)
+
+### Delete
+![exDelete](https://user-images.githubusercontent.com/63037629/147388372-a5a916fa-b829-4adc-9e0c-0b4adf082a09.gif)
+
+### Update
+![exUpdate](https://user-images.githubusercontent.com/63037629/147388376-7c257fc4-3191-4c84-8188-2ea3d863172e.gif)
 
 ## 기타 사항
 
 ### 글꼴, 이미지 소스
 
 - [글꼴 [나눔고딕]](https://hangeul.naver.com/2021/fonts/nanum)
+- [개발과정](https://blog.naver.com/PostList.naver?blogId=hanjo1515&from=postList&categoryNo=24#)
