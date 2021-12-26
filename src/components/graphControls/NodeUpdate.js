@@ -1,11 +1,11 @@
-/* eslint-disable no-console */
-import { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useState } from 'react';
 
-import nodeInputState from '../globalState/nodeControl';
-
-const NodeDelete = ({ cyRef }) => {
-  const [updateNode, setUpdateNode] = useRecoilState(nodeInputState);
+const NodeUpdate = ({
+  cyRef,
+  targetNode,
+  onChangeTargetNode,
+  initTargetNode,
+}) => {
   const [updateName, setUpdateName] = useState('');
   const [updateType, setUpdateType] = useState(true);
 
@@ -13,21 +13,8 @@ const NodeDelete = ({ cyRef }) => {
     setUpdateName(e.target.value);
   };
 
-  useEffect(() => {
-    // 노드 클릭 이벤트
-    cyRef.current.on('tap', 'node', (e) => {
-      const node = e.target;
-      setUpdateNode(node.id());
-      console.log(node.data().label);
-    });
-  }, [cyRef, setUpdateNode]);
-
-  const onChangeUpdateNode = (e) => {
-    setUpdateNode(e.target.value);
-  };
-
   const changeMode = () => {
-    setUpdateNode('');
+    initTargetNode();
     setUpdateName('');
     setUpdateType(!updateType);
   };
@@ -35,11 +22,10 @@ const NodeDelete = ({ cyRef }) => {
   // 노드 수정 이벤트
   const onUpdateNode = (e) => {
     e.preventDefault();
-    const findNode = cyRef.current.$(`[id = "${updateNode}"]`);
+    const findNode = cyRef.current.$(`[id = "${targetNode}"]`);
     findNode.data('label', updateName);
-    setUpdateNode('');
+    initTargetNode();
     setUpdateName('');
-    // console.log(cyRef.current.$('*'));
   };
 
   return (
@@ -49,11 +35,11 @@ const NodeDelete = ({ cyRef }) => {
       </button>
       {updateType ? (
         <form onSubmit={onUpdateNode}>
-          <p>바꿀 노드 id: {updateNode} </p>
+          <p>바꿀 노드 id: {targetNode} </p>
           <input
             type='text'
-            value={updateNode}
-            onChange={onChangeUpdateNode}
+            value={targetNode}
+            onChange={onChangeTargetNode}
             placeholder='수정할 노드 이름'
             hidden='hidden'
           />
@@ -74,4 +60,4 @@ const NodeDelete = ({ cyRef }) => {
   );
 };
 
-export default NodeDelete;
+export default NodeUpdate;

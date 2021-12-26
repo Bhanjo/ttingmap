@@ -1,45 +1,36 @@
-/* eslint-disable no-console */
 /* eslint-disable no-alert */
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const InputGraph = styled.input`
   /* width: 300px; */
 `;
 
-const NodeCreate = ({ cyRef }) => {
+const NodeCreate = ({
+  cyRef,
+  targetNode,
+  onChangeTargetNode,
+  initTargetNode,
+  nodeIdCounter,
+  countNodeIdCounter,
+}) => {
   const [insertType, setInsertType] = useState(true);
   const [newNode, setNewNode] = useState('');
-  const [targetNode, setTargetNode] = useState('');
-  const nodeIdCounter = useRef(5);
-
-  // let isExist = false;
   let isExist = true;
 
   // form 내용 변경 감지
   const onChangeNewNode = (e) => {
     setNewNode(e.target.value);
   };
-  const onChangeTargetNode = (e) => {
-    setTargetNode(e.target.value);
-  };
 
   // 존재유무판단
   const insertIsExist = (...item) => {
-    if (item.length === 1) {
-      if (cyRef.current.getElementById(item[0].data.label).length === 0) {
-        isExist = true;
-      } else {
+    isExist = true;
+    item.forEach((node) => {
+      if (cyRef.current.getElementById(node).length === 0) {
         isExist = false;
       }
-    } else if (item.length === 2) {
-      isExist = true;
-      item.forEach((node) => {
-        if (cyRef.current.getElementById(node).length === 0) {
-          isExist = false;
-        }
-      });
-    }
+    });
   };
 
   // 노드 추가 이벤트
@@ -56,7 +47,7 @@ const NodeCreate = ({ cyRef }) => {
     };
     e.preventDefault();
     cyRef.current.add(item);
-    nodeIdCounter.current += 1;
+    countNodeIdCounter();
     setNewNode('');
   };
 
@@ -74,7 +65,7 @@ const NodeCreate = ({ cyRef }) => {
     if (isExist) {
       cyRef.current.add(newConnect);
       setNewNode('');
-      setTargetNode('');
+      initTargetNode();
     } else {
       alert(`입력값을 다시 확인해주세요`);
     }
@@ -83,7 +74,7 @@ const NodeCreate = ({ cyRef }) => {
   // 입력모드 변경 이벤트
   const changeInsertMode = () => {
     setNewNode('');
-    setTargetNode('');
+    initTargetNode();
     setInsertType(!insertType);
   };
 

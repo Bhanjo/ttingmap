@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
+import {
+  nodeInputState,
+  targetNodeInputState,
+} from './globalState/nodeControl';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';
 import NodeUpdate from './graphControls/NodeUpdate';
@@ -34,10 +39,33 @@ const CytoscapeControl = ({ cyRef }) => {
     { name: '삭제', mode: 'delete' },
   ]);
   const [currentMode, setCurrentMode] = useState('create');
+  // const [newNode, setNewNode] = useRecoilState(nodeInputState);
+  const [targetNode, setTargetNode] = useRecoilState(targetNodeInputState);
+  const nodeIdCounter = useRef(5);
+
+  const initTargetNode = () => {
+    setTargetNode('');
+  };
+
+  const onChangeTargetNode = (e) => {
+    setTargetNode(e.target.value);
+  };
 
   const handleMode = (mode) => {
     setCurrentMode(mode);
   };
+
+  const countNodeIdCounter = () => {
+    nodeIdCounter.current += 1;
+  };
+
+  useEffect(() => {
+    // 노드 클릭 이벤트
+    cyRef.current.on('tap', 'node', (e) => {
+      const node = e.target;
+      setTargetNode(node.id());
+    });
+  }, [cyRef, setTargetNode]);
 
   return (
     <ControlContainer>
@@ -54,9 +82,27 @@ const CytoscapeControl = ({ cyRef }) => {
         </ControlCategory>
       </div>
       <div>
-        {currentMode === 'create' && <NodeCreate cyRef={cyRef} />}
-        {currentMode === 'delete' && <NodeDelete cyRef={cyRef} />}
-        {currentMode === 'update' && <NodeUpdate cyRef={cyRef} />}
+        {currentMode === 'create' && (
+          <NodeCreate
+            cyRef={cyRef}
+            targetNode={targetNode}
+            nodeIdCounter={nodeIdCounter}
+            countNodeIdCounter={countNodeIdCounter}
+            onChangeTargetNode={onChangeTargetNode}
+            initTargetNode={initTargetNode}
+          />
+        )}
+        {currentMode === 'delete' && (
+          <NodeDelete cyRef={cyRef} targetNode={targetNode} />
+        )}
+        {currentMode === 'update' && (
+          <NodeUpdate
+            cyRef={cyRef}
+            targetNode={targetNode}
+            onChangeTargetNode={onChangeTargetNode}
+            initTargetNode={initTargetNode}
+          />
+        )}
       </div>
     </ControlContainer>
   );
