@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useState, useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import {
@@ -41,7 +41,7 @@ const CytoscapeControl = ({ cyRef }) => {
     { name: '삭제', mode: 'delete' },
   ]);
   const [currentMode, setCurrentMode] = useState('create');
-  const [inputType, setInputType] = useRecoilState(isModeNode);
+  const inputType = useRecoilValue(isModeNode);
   const [nodeId, setNodeId] = useRecoilState(nodeInputState);
   const [targetNode, setTargetNode] = useRecoilState(targetNodeInputState);
   const nodeIdCounter = useRef(5);
@@ -76,36 +76,17 @@ const CytoscapeControl = ({ cyRef }) => {
   useEffect(() => {
     const cy = cyRef.current;
     // 노드 클릭 이벤트
-    cy.on('tap', 'node', (e) => {
-      if (inputType) {
-        const node = e.target;
-        setNodeId(node.id());
-      }
-      // else {
-      //   const node = e.target;
-      //   setTargetNode(node.id());
-      // }
-    });
-
-    // if (inputType) {
-    //   console.log('oneStart');
-    //   cy.on('tab', 'node', (e) => {
-    //     console.log('one');
-    //     const node = e.target;
-    //     setNodeId(node.id());
-    //   });
-    // } else {
-    //   cy.one('tab', 'node', (e) => {
-    //     console.log('two1');
-    //     const node = e.target;
-    //     setNodeId(node.id());
-    //   });
-    //   cy.one('tab', 'node', (e) => {
-    //     console.log('two2');
-    //     const node = e.target;
-    //     setTargetNode(node.id());
-    //   });
-    // }
+    const nodeClickHandler = (e) => {
+      const node = e.target;
+      setNodeId(node.id());
+    };
+    if (inputType) {
+      // console.log('추가');
+      cy.on('tap', 'node', nodeClickHandler);
+    } else {
+      // console.log('삭제');
+      cy.removeListener('tap', nodeClickHandler);
+    }
   }, [cyRef, inputType, setNodeId, setTargetNode]);
 
   return (
@@ -126,6 +107,9 @@ const CytoscapeControl = ({ cyRef }) => {
         {currentMode === 'create' && (
           <NodeCreate
             cyRef={cyRef}
+            inputType={inputType}
+            nodeId={nodeId}
+            onChangeNodeId={onChangeNodeId}
             targetNode={targetNode}
             nodeIdCounter={nodeIdCounter}
             countNodeIdCounter={countNodeIdCounter}
