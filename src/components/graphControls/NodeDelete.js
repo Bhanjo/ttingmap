@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { isModeNode } from '../globalState/nodeControl';
@@ -28,7 +28,6 @@ const NodeDelete = ({
 
   const changeMode = () => {
     initNode();
-    // setTargetNode('');
     setRemoveType(!removeType);
   };
 
@@ -45,9 +44,24 @@ const NodeDelete = ({
     e.preventDefault();
     cyRef.current.remove(`edge[source = "${nodeId}"][target= "${targetNode}"]`);
     initNode();
-    // setTargetNode('');
     initTargetNode();
   };
+
+  useEffect(() => {
+    const cy = cyRef.current;
+    // 간선 삭제 컨트롤
+    if (removeType === false) {
+      cy.removeListener('tap', 'node');
+      cy.on('tap', 'edge', (e) => {
+        const edge = e.target;
+        onChangeNodeId(edge.data().source);
+        onChangeTargetNode(edge.data().target);
+      });
+    }
+    return () => {
+      cy.removeListener('tap', 'edge');
+    };
+  }, [cyRef, removeType, onChangeNodeId, onChangeTargetNode]);
 
   return (
     <>

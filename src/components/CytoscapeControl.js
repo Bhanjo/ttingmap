@@ -48,6 +48,8 @@ const CytoscapeControl = ({ cyRef }) => {
 
   // CRUD 타입 결정
   const handleMode = (mode) => {
+    setNodeId('');
+    setTargetNode('');
     setCurrentMode(mode);
   };
 
@@ -55,16 +57,16 @@ const CytoscapeControl = ({ cyRef }) => {
   const initNodeId = () => {
     setNodeId();
   };
-  const onChangeNodeId = (e) => {
-    setNodeId(e.target.value);
+  const onChangeNodeId = (value) => {
+    setNodeId(value);
   };
 
   // edge 타겟 노드 이벤트
   const initTargetNode = () => {
     setTargetNode('');
   };
-  const onChangeTargetNode = (e) => {
-    setTargetNode(e.target.value);
+  const onChangeTargetNode = (value) => {
+    setTargetNode(value);
   };
 
   const countNodeIdCounter = () => {
@@ -78,11 +80,32 @@ const CytoscapeControl = ({ cyRef }) => {
       if (inputType) {
         const node = e.target;
         setNodeId(node.id());
-      } else {
-        const node = e.target;
-        setTargetNode(node.id());
       }
+      // else {
+      //   const node = e.target;
+      //   setTargetNode(node.id());
+      // }
     });
+
+    // if (inputType) {
+    //   console.log('oneStart');
+    //   cy.on('tab', 'node', (e) => {
+    //     console.log('one');
+    //     const node = e.target;
+    //     setNodeId(node.id());
+    //   });
+    // } else {
+    //   cy.one('tab', 'node', (e) => {
+    //     console.log('two1');
+    //     const node = e.target;
+    //     setNodeId(node.id());
+    //   });
+    //   cy.one('tab', 'node', (e) => {
+    //     console.log('two2');
+    //     const node = e.target;
+    //     setTargetNode(node.id());
+    //   });
+    // }
   }, [cyRef, inputType, setNodeId, setTargetNode]);
 
   return (

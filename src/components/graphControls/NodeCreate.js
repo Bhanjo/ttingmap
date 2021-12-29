@@ -18,7 +18,6 @@ const NodeCreate = ({
   countNodeIdCounter,
 }) => {
   const [insertType, setInsertType] = useRecoilState(isModeNode);
-  // const [insertType, setInsertType] = useState(true);
   const [newNode, setNewNode] = useState('');
   let isExist = true;
 
@@ -78,7 +77,6 @@ const NodeCreate = ({
   // 입력모드 변경 이벤트
   const changeInsertMode = () => {
     setNewNode('');
-    initTargetNode();
     setInsertType(!insertType);
   };
 
