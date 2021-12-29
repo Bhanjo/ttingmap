@@ -1,20 +1,28 @@
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+
+import { isModeNode } from '../globalState/nodeControl';
 
 const NodeUpdate = ({
   cyRef,
+  nodeId,
+  onChangeNodeId,
   targetNode,
   onChangeTargetNode,
   initTargetNode,
 }) => {
   const [updateName, setUpdateName] = useState('');
-  const [updateType, setUpdateType] = useState(true);
+  const [updateType, setUpdateType] = useRecoilState(isModeNode);
+
+  const onChangeNode = (e) => {
+    onChangeNodeId(e.target.value);
+  };
 
   const onChangeUpdateName = (e) => {
     setUpdateName(e.target.value);
   };
 
   const changeMode = () => {
-    initTargetNode();
     setUpdateName('');
     setUpdateType(!updateType);
   };
@@ -22,9 +30,8 @@ const NodeUpdate = ({
   // 노드 수정 이벤트
   const onUpdateNode = (e) => {
     e.preventDefault();
-    const findNode = cyRef.current.$(`[id = "${targetNode}"]`);
+    const findNode = cyRef.current.$(`[id = "${nodeId}"]`);
     findNode.data('label', updateName);
-    initTargetNode();
     setUpdateName('');
   };
 
@@ -35,11 +42,11 @@ const NodeUpdate = ({
       </button>
       {updateType ? (
         <form onSubmit={onUpdateNode}>
-          <p>바꿀 노드 id: {targetNode} </p>
+          <p>바꿀 노드 id: {nodeId} </p>
           <input
             type='text'
-            value={targetNode}
-            onChange={onChangeTargetNode}
+            value={nodeId}
+            onChange={onChangeNode}
             placeholder='수정할 노드 이름'
             hidden='hidden'
           />

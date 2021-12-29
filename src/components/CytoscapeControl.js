@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -5,6 +6,7 @@ import styled from 'styled-components';
 import {
   nodeInputState,
   targetNodeInputState,
+  isModeNode,
 } from './globalState/nodeControl';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';
@@ -39,20 +41,30 @@ const CytoscapeControl = ({ cyRef }) => {
     { name: '삭제', mode: 'delete' },
   ]);
   const [currentMode, setCurrentMode] = useState('create');
-  // const [newNode, setNewNode] = useRecoilState(nodeInputState);
+  const [inputType, setInputType] = useRecoilState(isModeNode);
+  const [nodeId, setNodeId] = useRecoilState(nodeInputState);
   const [targetNode, setTargetNode] = useRecoilState(targetNodeInputState);
   const nodeIdCounter = useRef(5);
 
+  // CRUD 타입 결정
+  const handleMode = (mode) => {
+    setCurrentMode(mode);
+  };
+
+  // 싱글 노드 이벤트
+  const initNodeId = () => {
+    setNodeId();
+  };
+  const onChangeNodeId = (e) => {
+    setNodeId(e.target.value);
+  };
+
+  // edge 타겟 노드 이벤트
   const initTargetNode = () => {
     setTargetNode('');
   };
-
   const onChangeTargetNode = (e) => {
     setTargetNode(e.target.value);
-  };
-
-  const handleMode = (mode) => {
-    setCurrentMode(mode);
   };
 
   const countNodeIdCounter = () => {
@@ -60,12 +72,18 @@ const CytoscapeControl = ({ cyRef }) => {
   };
 
   useEffect(() => {
+    const cy = cyRef.current;
     // 노드 클릭 이벤트
-    cyRef.current.on('tap', 'node', (e) => {
-      const node = e.target;
-      setTargetNode(node.id());
+    cy.on('tap', 'node', (e) => {
+      if (inputType) {
+        const node = e.target;
+        setNodeId(node.id());
+      } else {
+        const node = e.target;
+        setTargetNode(node.id());
+      }
     });
-  }, [cyRef, setTargetNode]);
+  }, [cyRef, inputType, setNodeId, setTargetNode]);
 
   return (
     <ControlContainer>
@@ -93,11 +111,21 @@ const CytoscapeControl = ({ cyRef }) => {
           />
         )}
         {currentMode === 'delete' && (
-          <NodeDelete cyRef={cyRef} targetNode={targetNode} />
+          <NodeDelete
+            cyRef={cyRef}
+            nodeId={nodeId}
+            onChangeNodeId={onChangeNodeId}
+            initNodeId={initNodeId}
+            targetNode={targetNode}
+            onChangeTargetNode={onChangeTargetNode}
+            initTargetNode={initTargetNode}
+          />
         )}
         {currentMode === 'update' && (
           <NodeUpdate
             cyRef={cyRef}
+            nodeId={nodeId}
+            onChangeNodeId={onChangeNodeId}
             targetNode={targetNode}
             onChangeTargetNode={onChangeTargetNode}
             initTargetNode={initTargetNode}

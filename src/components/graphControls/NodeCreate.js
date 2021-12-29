@@ -1,6 +1,9 @@
 /* eslint-disable no-alert */
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+
+import { isModeNode } from '../globalState/nodeControl';
 
 const InputGraph = styled.input`
   /* width: 300px; */
@@ -14,7 +17,8 @@ const NodeCreate = ({
   nodeIdCounter,
   countNodeIdCounter,
 }) => {
-  const [insertType, setInsertType] = useState(true);
+  const [insertType, setInsertType] = useRecoilState(isModeNode);
+  // const [insertType, setInsertType] = useState(true);
   const [newNode, setNewNode] = useState('');
   let isExist = true;
 

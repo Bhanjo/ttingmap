@@ -11,3 +11,9 @@ export const targetNodeInputState = atom({
   key: 'targetNodeInputState',
   default: '',
 });
+
+// 노드 모드인지 판단
+export const isModeNode = atom({
+  key: 'isModeNode',
+  default: true,
+});
