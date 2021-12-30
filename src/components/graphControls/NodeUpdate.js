@@ -1,4 +1,14 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+
+import InputBox from '../InputBox';
+import SubmitButton from '../SubmitButton';
+
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId }) => {
   const [updateName, setUpdateName] = useState('');
@@ -20,25 +30,22 @@ const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId }) => {
   };
 
   return (
-    <form onSubmit={onUpdateNode}>
-      <p>바꿀 노드 id: {nodeId} </p>
-      <input
+    <FormBox onSubmit={onUpdateNode}>
+      <InputBox
         type='text'
         value={nodeId}
         onChange={onChangeNode}
-        placeholder='수정할 노드 이름'
-        hidden='hidden'
+        placeholder='수정할 요소를 클릭하세요'
+        readOnly
       />
-      <input
+      <InputBox
         type='text'
         value={updateName}
         onChange={onChangeUpdateName}
-        placeholder='새로운 이름'
+        placeholder='ex: 새로운 이름'
       />
-      <button type='submit' label='test'>
-        수정하기
-      </button>
-    </form>
+      <SubmitButton type='submit' label='test' text='변경' />
+    </FormBox>
   );
 };
 

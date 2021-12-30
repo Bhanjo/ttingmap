@@ -1,8 +1,16 @@
-/* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
+import InputBox from '../InputBox';
+import SubmitButton from '../SubmitButton';
 import { isModeNode } from '../globalState/nodeControl';
+
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const NodeDelete = ({
   cyRef,
@@ -69,37 +77,34 @@ const NodeDelete = ({
         모드변경하기
       </button>
       {removeType ? (
-        <form onSubmit={onRemoveNode}>
-          <p>선택된 id : {nodeId}</p>
-          <input
+        <FormBox onSubmit={onRemoveNode}>
+          <InputBox
             type='text'
             value={nodeId || ''}
             onChange={onChangeRemoveNode}
-            placeholder='삭제할 노드를 선택하세요'
-            hidden
+            placeholder='삭제할 요소를 선택하세요'
+            readOnly
           />
-          <button type='submit' label='test'>
-            삭제하기
-          </button>
-        </form>
+          <SubmitButton type='submit' label='test' text='삭제' />
+        </FormBox>
       ) : (
-        <form onSubmit={onRemoveEdge}>
-          <input
+        <FormBox onSubmit={onRemoveEdge}>
+          <InputBox
             type='text'
             value={nodeId || ''}
             onChange={onChangeRemoveNode}
-            placeholder='From'
+            placeholder='선을 선택하세요'
+            readOnly
           />
-          <input
+          <InputBox
             type='text'
             value={targetNode || ''}
             onChange={onChangeConnectNode}
-            placeholder='To'
+            placeholder='선을 선택하세요'
+            readOnly
           />
-          <button type='submit' label='test'>
-            삭제하기
-          </button>
-        </form>
+          <SubmitButton type='submit' label='test' text='삭제' />
+        </FormBox>
       )}
     </>
   );

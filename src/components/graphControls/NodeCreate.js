@@ -1,9 +1,17 @@
 /* eslint-disable no-alert */
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
 import InputBox from '../InputBox';
+import SubmitButton from '../SubmitButton';
 import { isModeNode } from '../globalState/nodeControl';
+
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const NodeCreate = ({
   cyRef,
@@ -118,20 +126,18 @@ const NodeCreate = ({
       </button>
       {insertType ? (
         // 신규노드추가
-        <form onSubmit={onNewGraph}>
+        <FormBox onSubmit={onNewGraph}>
           <InputBox
             type='text'
             placeholder='ex: 프로젝트 만들기'
             value={newNode}
             onChange={onChangeNewNode}
           />
-          <button type='submit' label='test'>
-            추가하기
-          </button>
-        </form>
+          <SubmitButton type='submit' label='test' text='추가' />
+        </FormBox>
       ) : (
         // 노드연결하기
-        <form onSubmit={onConnectGraph}>
+        <FormBox onSubmit={onConnectGraph}>
           <InputBox
             type='text'
             placeholder='시작요소'
@@ -139,6 +145,7 @@ const NodeCreate = ({
             onChange={onChangeToNode}
             onFocus={onFocusToNode}
             name='startNode'
+            readOnly
           />
           <InputBox
             type='text'
@@ -147,11 +154,10 @@ const NodeCreate = ({
             onChange={onChangeFromNode}
             onFocus={onFocusToNode}
             name='endNode'
+            readOnly
           />
-          <button type='submit' label='test'>
-            연결하기
-          </button>
-        </form>
+          <SubmitButton type='submit' label='test' text='연결' />
+        </FormBox>
       )}
     </div>
   );
