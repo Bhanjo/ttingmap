@@ -26,11 +26,20 @@ const ControlCategory = styled.ul`
   display: flex;
   justify-content: center;
   text-decoration: none;
+  margin-bottom: 25px;
 `;
 
-const ControlCategoryMode = styled.li`
+const ControlCategoryMode = styled.input`
   margin: 0 0.5rem;
   cursor: pointer;
+`;
+
+const ControlCategryModeLabel = styled.label`
+  margin: 0 0.5rem;
+  cursor: pointer;
+  ${ControlCategoryMode}:checked ~ & {
+    border-bottom: 3px solid #5d5fef;
+  }
 `;
 
 const CytoscapeControl = ({ cyRef }) => {
@@ -94,14 +103,23 @@ const CytoscapeControl = ({ cyRef }) => {
   return (
     <ControlContainer>
       <div>
+        {/* 컨트롤 카테고리 컴포넌트화 시키기 */}
         <ControlCategory>
           {controlModes.map((mode) => (
-            <ControlCategoryMode
-              onClick={() => handleMode(mode.mode)}
-              key={mode.mode}
-            >
-              <p>{mode.name}</p>
-            </ControlCategoryMode>
+            <div key={mode.mode}>
+              <ControlCategoryMode
+                onClick={() => handleMode(mode.mode)}
+                id={mode.mode}
+                type='radio'
+                value={mode.mode}
+                name='modes'
+                hidden
+                defaultChecked={mode.mode === 'create'}
+              />
+              <ControlCategryModeLabel htmlFor={mode.mode}>
+                {mode.name}
+              </ControlCategryModeLabel>
+            </div>
           ))}
         </ControlCategory>
       </div>
@@ -129,6 +147,7 @@ const CytoscapeControl = ({ cyRef }) => {
             targetNode={targetNode}
             onChangeTargetNode={onChangeTargetNode}
             initTargetNode={initTargetNode}
+            nodeClickHandler={nodeClickHandler}
           />
         )}
         {currentMode === 'update' && (

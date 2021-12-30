@@ -1,13 +1,17 @@
-/* eslint-disable no-console */
 /* eslint-disable no-alert */
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
+import InputBox from '../InputBox';
+import NodeEdgeChange from '../NodeEdgeChange';
+import SubmitButton from '../SubmitButton';
 import { isModeNode } from '../globalState/nodeControl';
 
-const InputGraph = styled.input`
-  /* width: 300px; */
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const NodeCreate = ({
@@ -99,7 +103,7 @@ const NodeCreate = ({
         if (h.target.name === 'startNode') {
           cyRef.current.removeListener('tap', 'node');
           onChangeToNode(node.id());
-        } else {
+        } else if (h.target.name === 'endNode') {
           cyRef.current.removeListener('tap', 'node');
           onChangeFromNode(node.id());
         }
@@ -118,45 +122,42 @@ const NodeCreate = ({
 
   return (
     <div>
-      <button type='button' onClick={changeInsertMode}>
-        모드변경하기
-      </button>
+      <NodeEdgeChange type='button' onClick={changeInsertMode} />
+
       {insertType ? (
         // 신규노드추가
-        <form onSubmit={onNewGraph}>
-          <InputGraph
+        <FormBox onSubmit={onNewGraph}>
+          <InputBox
             type='text'
-            placeholder='추가할 노드의 이름을 입력하세요'
+            placeholder='ex: 프로젝트 만들기'
             value={newNode}
             onChange={onChangeNewNode}
           />
-          <button type='submit' label='test'>
-            추가하기
-          </button>
-        </form>
+          <SubmitButton type='submit' label='test' text='추가' />
+        </FormBox>
       ) : (
         // 노드연결하기
-        <form onSubmit={onConnectGraph}>
-          <InputGraph
+        <FormBox onSubmit={onConnectGraph}>
+          <InputBox
             type='text'
             placeholder='시작요소'
             value={nodeId}
             onChange={onChangeToNode}
             onFocus={onFocusToNode}
             name='startNode'
+            readOnly
           />
-          <InputGraph
+          <InputBox
             type='text'
             placeholder='타겟요소'
             value={targetNode}
             onChange={onChangeFromNode}
             onFocus={onFocusToNode}
             name='endNode'
+            readOnly
           />
-          <button type='submit' label='test'>
-            연결하기
-          </button>
-        </form>
+          <SubmitButton type='submit' label='test' text='연결' />
+        </FormBox>
       )}
     </div>
   );
