@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -73,19 +73,23 @@ const CytoscapeControl = ({ cyRef }) => {
     nodeIdCounter.current += 1;
   };
 
-  useEffect(() => {
-    const cy = cyRef.current;
-    // 노드 클릭 이벤트
-    const nodeClickHandler = (e) => {
+  // 노드 클릭 이벤트
+  const nodeClickHandler = useCallback(
+    (e) => {
       const node = e.target;
       setNodeId(node.id());
-    };
+    },
+    [setNodeId],
+  );
+
+  useEffect(() => {
+    const cy = cyRef.current;
     if (inputType) {
       cy.on('tap', 'node', nodeClickHandler);
     } else {
       cy.removeListener('tap', nodeClickHandler);
     }
-  }, [cyRef, inputType, setNodeId, setTargetNode]);
+  }, [cyRef, inputType, nodeClickHandler]);
 
   return (
     <ControlContainer>
@@ -113,6 +117,7 @@ const CytoscapeControl = ({ cyRef }) => {
             countNodeIdCounter={countNodeIdCounter}
             onChangeTargetNode={onChangeTargetNode}
             initTargetNode={initTargetNode}
+            nodeClickHandler={nodeClickHandler}
           />
         )}
         {currentMode === 'delete' && (
