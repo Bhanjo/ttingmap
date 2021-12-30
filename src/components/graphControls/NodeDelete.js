@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import InputBox from '../InputBox';
+import NodeEdgeChange from '../NodeEdgeChange';
 import SubmitButton from '../SubmitButton';
 import { isModeNode } from '../globalState/nodeControl';
 
@@ -73,9 +74,7 @@ const NodeDelete = ({
 
   return (
     <>
-      <button type='button' onClick={changeMode}>
-        모드변경하기
-      </button>
+      <NodeEdgeChange type='button' onClick={changeMode} />
       {removeType ? (
         <FormBox onSubmit={onRemoveNode}>
           <InputBox

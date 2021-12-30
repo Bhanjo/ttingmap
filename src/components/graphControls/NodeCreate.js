@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import InputBox from '../InputBox';
+import NodeEdgeChange from '../NodeEdgeChange';
 import SubmitButton from '../SubmitButton';
 import { isModeNode } from '../globalState/nodeControl';
 
@@ -121,9 +122,8 @@ const NodeCreate = ({
 
   return (
     <div>
-      <button type='button' onClick={changeInsertMode}>
-        모드변경하기
-      </button>
+      <NodeEdgeChange type='button' onClick={changeInsertMode} />
+
       {insertType ? (
         // 신규노드추가
         <FormBox onSubmit={onNewGraph}>
