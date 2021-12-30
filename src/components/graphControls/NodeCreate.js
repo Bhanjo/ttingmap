@@ -1,14 +1,9 @@
-/* eslint-disable no-console */
 /* eslint-disable no-alert */
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import styled from 'styled-components';
 
+import InputBox from '../InputBox';
 import { isModeNode } from '../globalState/nodeControl';
-
-const InputGraph = styled.input`
-  /* width: 300px; */
-`;
 
 const NodeCreate = ({
   cyRef,
@@ -99,7 +94,7 @@ const NodeCreate = ({
         if (h.target.name === 'startNode') {
           cyRef.current.removeListener('tap', 'node');
           onChangeToNode(node.id());
-        } else {
+        } else if (h.target.name === 'endNode') {
           cyRef.current.removeListener('tap', 'node');
           onChangeFromNode(node.id());
         }
@@ -124,9 +119,9 @@ const NodeCreate = ({
       {insertType ? (
         // 신규노드추가
         <form onSubmit={onNewGraph}>
-          <InputGraph
+          <InputBox
             type='text'
-            placeholder='추가할 노드의 이름을 입력하세요'
+            placeholder='ex: 프로젝트 만들기'
             value={newNode}
             onChange={onChangeNewNode}
           />
@@ -137,7 +132,7 @@ const NodeCreate = ({
       ) : (
         // 노드연결하기
         <form onSubmit={onConnectGraph}>
-          <InputGraph
+          <InputBox
             type='text'
             placeholder='시작요소'
             value={nodeId}
@@ -145,7 +140,7 @@ const NodeCreate = ({
             onFocus={onFocusToNode}
             name='startNode'
           />
-          <InputGraph
+          <InputBox
             type='text'
             placeholder='타겟요소'
             value={targetNode}
