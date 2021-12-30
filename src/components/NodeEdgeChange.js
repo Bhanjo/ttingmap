@@ -6,7 +6,7 @@ import { isModeNode } from './globalState/nodeControl';
 const Container = styled.div`
   justify-content: center;
   display: flex;
-  margin: 12px 0;
+  margin-bottom: 12px;
 `;
 
 const NodeButton = styled.button`
@@ -15,6 +15,7 @@ const NodeButton = styled.button`
   border: 1px solid #898bff;
   width: 82px;
   height: 25px;
+  transition: 0.4s;
   border-radius: 12px 0 0 12px;
   background-color: ${(props) => (props.checkNodeMode ? '#898bff' : '#fff')};
   color: ${(props) => (props.checkNodeMode ? '#fff' : '#898bff')};
@@ -25,6 +26,7 @@ const EdgeButton = styled.button`
   border: 1px solid #898bff;
   width: 82px;
   height: 25px;
+  transition: 0.4s;
   border-radius: 0 12px 12px 0;
   background-color: ${(props) => (props.checkNodeMode ? '#fff' : '#898bff')};
   color: ${(props) => (props.checkNodeMode ? '#898bff' : '#fff')};

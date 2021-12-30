@@ -21,6 +21,7 @@ const NodeDelete = ({
   targetNode,
   onChangeTargetNode,
   initTargetNode,
+  nodeClickHandler,
 }) => {
   const [removeType, setRemoveType] = useRecoilState(isModeNode);
 
@@ -69,8 +70,9 @@ const NodeDelete = ({
     }
     return () => {
       cy.removeListener('tap', 'edge');
+      cy.on('tap', 'node', nodeClickHandler);
     };
-  }, [cyRef, removeType, onChangeNodeId, onChangeTargetNode]);
+  }, [cyRef, removeType, onChangeNodeId, onChangeTargetNode, nodeClickHandler]);
 
   return (
     <>
