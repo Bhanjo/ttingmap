@@ -91,6 +91,7 @@ const NodeCreate = ({
   };
 
   // edge 추가 포커스 이벤트
+  // 간혈적으로 source와 target 동시 수정되는 문제 해결 필요
   const onFocusToNode = (h) => {
     if (insertType === false) {
       cyRef.current.on('tap', 'node', (e) => {

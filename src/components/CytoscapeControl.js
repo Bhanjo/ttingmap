@@ -81,10 +81,8 @@ const CytoscapeControl = ({ cyRef }) => {
       setNodeId(node.id());
     };
     if (inputType) {
-      // console.log('추가');
       cy.on('tap', 'node', nodeClickHandler);
     } else {
-      // console.log('삭제');
       cy.removeListener('tap', nodeClickHandler);
     }
   }, [cyRef, inputType, setNodeId, setTargetNode]);
@@ -133,9 +131,6 @@ const CytoscapeControl = ({ cyRef }) => {
             cyRef={cyRef}
             nodeId={nodeId}
             onChangeNodeId={onChangeNodeId}
-            targetNode={targetNode}
-            onChangeTargetNode={onChangeTargetNode}
-            initTargetNode={initTargetNode}
           />
         )}
       </div>
