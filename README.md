@@ -18,7 +18,7 @@
 
 ### 🧪 구현 현황
 
-- [X] 메인 페이지 디자인, 구현
+- [x] 메인 페이지 디자인, 구현
 - [ ] 그래프 CRUD 기능(추가 기능 완성)
 - [ ] Local Storage에 데이터 저장
 - [ ] 마인드 맵 export 기능 구현
@@ -27,14 +27,15 @@
 
 - React
 - JavaScript
-- Styled-Component
-- Styled-reset
-- React-Router-Dom
 - Cytoscape(Cytoscape / react-cytoscape)
+- recoil
+- Styled-Component, Styled-reset
+- React-Router-Dom
 
 ## 💎 핵심 기능
 
 - 그래프 표현(cytoscape)
+
   - [cytoscape](https://js.cytoscape.org/)
   - [react-cytoscape](https://github.com/plotly/react-cytoscapejs)
 

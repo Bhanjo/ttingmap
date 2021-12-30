@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+/* eslint-disable no-console */
+import { useEffect, useRef } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
 import styled from 'styled-components';
 
@@ -25,28 +26,8 @@ const MindMap = () => {
     nodes: [
       {
         data: {
-          id: 'Node 1',
-          label: 'Node 1',
-        },
-        position: {
-          x: 640,
-          y: 360,
-        },
-      },
-      {
-        data: {
-          id: 'Node 3',
-          label: 'Node 3',
-        },
-        position: {
-          x: 540,
-          y: 360,
-        },
-      },
-      {
-        data: {
           id: '1',
-          label: '1',
+          label: '노드1',
         },
         position: {
           x: 340,
@@ -56,7 +37,7 @@ const MindMap = () => {
       {
         data: {
           id: '2',
-          label: '2',
+          label: '노드2',
         },
         position: {
           x: 440,
@@ -66,7 +47,7 @@ const MindMap = () => {
       {
         data: {
           id: '3',
-          label: '3',
+          label: '노드3',
         },
         position: {
           x: 140,
@@ -76,7 +57,7 @@ const MindMap = () => {
       {
         data: {
           id: '4',
-          label: '4',
+          label: '노드4',
         },
         position: {
           x: 240,
@@ -85,13 +66,6 @@ const MindMap = () => {
       },
     ],
     edges: [
-      {
-        data: {
-          source: 'Node 1',
-          target: 'Node 3',
-          label: 'edge from node1 to node3',
-        },
-      },
       {
         data: {
           source: '1',
@@ -115,6 +89,7 @@ const MindMap = () => {
       },
     ],
   };
+
   // cytoscape DOM을 다루기 위한 ref
   const cyRef = useRef();
 

@@ -1,48 +1,57 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+
+import { isModeNode } from '../globalState/nodeControl';
 
 const InputGraph = styled.input`
   /* width: 300px; */
 `;
 
-const NodeCreate = ({ cyRef }) => {
-  const [insertType, setInsertType] = useState(true);
+const NodeCreate = ({
+  cyRef,
+  nodeId,
+  onChangeNodeId,
+  targetNode,
+  onChangeTargetNode,
+  initTargetNode,
+  nodeIdCounter,
+  countNodeIdCounter,
+  nodeClickHandler,
+}) => {
+  const [insertType, setInsertType] = useRecoilState(isModeNode);
   const [newNode, setNewNode] = useState('');
-  const [targetNode, setTargetNode] = useState('');
-  let isExist = false;
+  let isExist = true;
 
   // form 내용 변경 감지
   const onChangeNewNode = (e) => {
     setNewNode(e.target.value);
   };
-  const onChangeTargetNode = (e) => {
-    setTargetNode(e.target.value);
+
+  const onChangeToNode = (value) => {
+    onChangeNodeId(value);
+  };
+  const onChangeFromNode = (value) => {
+    onChangeTargetNode(value);
   };
 
   // 존재유무판단
   const insertIsExist = (...item) => {
-    if (item.length === 1) {
-      if (cyRef.current.getElementById(item[0].data.label).length === 0) {
-        isExist = true;
-      } else {
+    isExist = true;
+    item.forEach((node) => {
+      if (cyRef.current.getElementById(node).length === 0) {
         isExist = false;
       }
-    } else if (item.length === 2) {
-      isExist = true;
-      item.forEach((node) => {
-        if (cyRef.current.getElementById(node).length === 0) {
-          isExist = false;
-        }
-      });
-    }
+    });
   };
 
   // 노드 추가 이벤트
   const onNewGraph = (e) => {
     const item = {
       data: {
-        id: newNode,
+        id: nodeIdCounter.current,
         label: newNode,
       },
       position: {
@@ -51,12 +60,8 @@ const NodeCreate = ({ cyRef }) => {
       },
     };
     e.preventDefault();
-    insertIsExist(item);
-    if (isExist) {
-      cyRef.current.add(item);
-    } else {
-      alert(`${item.data.id}은/는 이미 존재합니다`);
-    }
+    cyRef.current.add(item);
+    countNodeIdCounter();
     setNewNode('');
   };
 
@@ -64,17 +69,17 @@ const NodeCreate = ({ cyRef }) => {
   const onConnectGraph = (e) => {
     const newConnect = {
       data: {
-        source: newNode,
+        source: nodeId,
         target: targetNode,
-        label: `edge from ${newNode} to ${targetNode}`,
+        label: `edge from ${nodeId} to ${targetNode}`,
       },
     };
     e.preventDefault();
-    insertIsExist(newNode, targetNode);
+    insertIsExist(nodeId, targetNode);
     if (isExist) {
       cyRef.current.add(newConnect);
-      setNewNode('');
-      setTargetNode('');
+      onChangeToNode('');
+      initTargetNode();
     } else {
       alert(`입력값을 다시 확인해주세요`);
     }
@@ -83,9 +88,33 @@ const NodeCreate = ({ cyRef }) => {
   // 입력모드 변경 이벤트
   const changeInsertMode = () => {
     setNewNode('');
-    setTargetNode('');
     setInsertType(!insertType);
   };
+
+  // edge 추가 포커스 이벤트
+  const onFocusToNode = (h) => {
+    if (insertType === false) {
+      cyRef.current.on('tap', 'node', (e) => {
+        const node = e.target;
+        if (h.target.name === 'startNode') {
+          cyRef.current.removeListener('tap', 'node');
+          onChangeToNode(node.id());
+        } else {
+          cyRef.current.removeListener('tap', 'node');
+          onChangeFromNode(node.id());
+        }
+      });
+    }
+  };
+
+  // edge 연결시 nodeClickHandler가 계속 활성화 되는 상태를 막음
+  useEffect(() => {
+    const cy = cyRef.current;
+    cy.removeListener('tap', nodeClickHandler);
+    return () => {
+      cy.on('tap', 'node', nodeClickHandler);
+    };
+  }, [cyRef, nodeClickHandler]);
 
   return (
     <div>
@@ -111,14 +140,18 @@ const NodeCreate = ({ cyRef }) => {
           <InputGraph
             type='text'
             placeholder='시작요소'
-            value={newNode}
-            onChange={onChangeNewNode}
+            value={nodeId}
+            onChange={onChangeToNode}
+            onFocus={onFocusToNode}
+            name='startNode'
           />
           <InputGraph
             type='text'
             placeholder='타겟요소'
             value={targetNode}
-            onChange={onChangeTargetNode}
+            onChange={onChangeFromNode}
+            onFocus={onFocusToNode}
+            name='endNode'
           />
           <button type='submit' label='test'>
             연결하기

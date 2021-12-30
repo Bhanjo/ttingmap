@@ -1,6 +1,13 @@
-import { useState } from 'react';
+/* eslint-disable no-console */
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import {
+  nodeInputState,
+  targetNodeInputState,
+  isModeNode,
+} from './globalState/nodeControl';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';
 import NodeUpdate from './graphControls/NodeUpdate';
@@ -34,10 +41,55 @@ const CytoscapeControl = ({ cyRef }) => {
     { name: '삭제', mode: 'delete' },
   ]);
   const [currentMode, setCurrentMode] = useState('create');
+  const inputType = useRecoilValue(isModeNode);
+  const [nodeId, setNodeId] = useRecoilState(nodeInputState);
+  const [targetNode, setTargetNode] = useRecoilState(targetNodeInputState);
+  const nodeIdCounter = useRef(5);
 
+  // CRUD 타입 결정
   const handleMode = (mode) => {
+    setNodeId('');
+    setTargetNode('');
     setCurrentMode(mode);
   };
+
+  // 싱글 노드 이벤트
+  const initNodeId = () => {
+    setNodeId();
+  };
+  const onChangeNodeId = (value) => {
+    setNodeId(value);
+  };
+
+  // edge 타겟 노드 이벤트
+  const initTargetNode = () => {
+    setTargetNode('');
+  };
+  const onChangeTargetNode = (value) => {
+    setTargetNode(value);
+  };
+
+  const countNodeIdCounter = () => {
+    nodeIdCounter.current += 1;
+  };
+
+  // 노드 클릭 이벤트
+  const nodeClickHandler = useCallback(
+    (e) => {
+      const node = e.target;
+      setNodeId(node.id());
+    },
+    [setNodeId],
+  );
+
+  useEffect(() => {
+    const cy = cyRef.current;
+    if (inputType) {
+      cy.on('tap', 'node', nodeClickHandler);
+    } else {
+      cy.removeListener('tap', nodeClickHandler);
+    }
+  }, [cyRef, inputType, nodeClickHandler]);
 
   return (
     <ControlContainer>
@@ -54,9 +106,38 @@ const CytoscapeControl = ({ cyRef }) => {
         </ControlCategory>
       </div>
       <div>
-        {currentMode === 'create' && <NodeCreate cyRef={cyRef} />}
-        {currentMode === 'delete' && <NodeDelete cyRef={cyRef} />}
-        {currentMode === 'update' && <NodeUpdate cyRef={cyRef} />}
+        {currentMode === 'create' && (
+          <NodeCreate
+            cyRef={cyRef}
+            inputType={inputType}
+            nodeId={nodeId}
+            onChangeNodeId={onChangeNodeId}
+            targetNode={targetNode}
+            nodeIdCounter={nodeIdCounter}
+            countNodeIdCounter={countNodeIdCounter}
+            onChangeTargetNode={onChangeTargetNode}
+            initTargetNode={initTargetNode}
+            nodeClickHandler={nodeClickHandler}
+          />
+        )}
+        {currentMode === 'delete' && (
+          <NodeDelete
+            cyRef={cyRef}
+            nodeId={nodeId}
+            onChangeNodeId={onChangeNodeId}
+            initNodeId={initNodeId}
+            targetNode={targetNode}
+            onChangeTargetNode={onChangeTargetNode}
+            initTargetNode={initTargetNode}
+          />
+        )}
+        {currentMode === 'update' && (
+          <NodeUpdate
+            cyRef={cyRef}
+            nodeId={nodeId}
+            onChangeNodeId={onChangeNodeId}
+          />
+        )}
       </div>
     </ControlContainer>
   );

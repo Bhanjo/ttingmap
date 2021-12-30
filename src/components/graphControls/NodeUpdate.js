@@ -1,63 +1,45 @@
-/* eslint-disable no-console */
 import { useState } from 'react';
 
-const NodeDelete = ({ cyRef }) => {
-  const [updateNode, setUpdateNode] = useState('');
+const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId }) => {
   const [updateName, setUpdateName] = useState('');
-  const [updateType, setUpdateType] = useState(true);
 
-  const onChangeUpdateNode = (e) => {
-    setUpdateNode(e.target.value);
+  const onChangeNode = (e) => {
+    onChangeNodeId(e.target.value);
   };
+
   const onChangeUpdateName = (e) => {
     setUpdateName(e.target.value);
-  };
-
-  const changeMode = () => {
-    setUpdateNode('');
-    setUpdateName('');
-    setUpdateType(!updateType);
   };
 
   // 노드 수정 이벤트
   const onUpdateNode = (e) => {
     e.preventDefault();
-    const findNode = cyRef.current.$(`[id = "${updateNode}"]`);
-    findNode.data('id', updateName);
+    const findNode = cyRef.current.$(`[id = "${nodeId}"]`);
     findNode.data('label', updateName);
-    setUpdateNode('');
     setUpdateName('');
-    console.log(cyRef.current.$('*'));
   };
 
   return (
-    <>
-      <button type='button' onClick={changeMode}>
-        모드변경하기
+    <form onSubmit={onUpdateNode}>
+      <p>바꿀 노드 id: {nodeId} </p>
+      <input
+        type='text'
+        value={nodeId}
+        onChange={onChangeNode}
+        placeholder='수정할 노드 이름'
+        hidden='hidden'
+      />
+      <input
+        type='text'
+        value={updateName}
+        onChange={onChangeUpdateName}
+        placeholder='새로운 이름'
+      />
+      <button type='submit' label='test'>
+        수정하기
       </button>
-      {updateType ? (
-        <form onSubmit={onUpdateNode}>
-          <input
-            type='text'
-            value={updateNode}
-            onChange={onChangeUpdateNode}
-            placeholder='수정할 노드 이름'
-          />
-          <input
-            type='text'
-            value={updateName}
-            onChange={onChangeUpdateName}
-            placeholder='새로운 이름'
-          />
-          <button type='submit' label='test'>
-            수정하기
-          </button>
-        </form>
-      ) : (
-        <p>다른모드</p>
-      )}
-    </>
+    </form>
   );
 };
 
-export default NodeDelete;
+export default NodeUpdate;
