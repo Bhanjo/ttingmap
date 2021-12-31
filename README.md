@@ -43,19 +43,23 @@
   - [LocalStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
 
 ## 🚀 동작 시연
-### 21.12.29 기준
+### 21.12.31 기준
 
-### Read
-![exRead](https://user-images.githubusercontent.com/63037629/147388362-94afa79a-a21e-4311-993e-838e7154968a.gif)
+### Interection
+![interection](https://user-images.githubusercontent.com/63037629/147819448-804c8a67-f1e9-4ec5-b8cd-500b8ffe2a1d.gif)
 
 ### Create
-![exCreate](https://user-images.githubusercontent.com/63037629/147388368-3bf56eec-4dae-4e64-9b6d-ba5eb8de33ec.gif)
+#### Node Create
+![createNode](https://user-images.githubusercontent.com/63037629/147819471-2221bb82-d6ac-4b5b-8fe6-16a9f6a48f6f.gif)
+
+#### Edge Create
+![createEdge](https://user-images.githubusercontent.com/63037629/147819493-40e44973-a831-49c0-9ce7-3cb8083f4e9b.gif)
 
 ### Delete
-![exDelete](https://user-images.githubusercontent.com/63037629/147388372-a5a916fa-b829-4adc-9e0c-0b4adf082a09.gif)
+![delete](https://user-images.githubusercontent.com/63037629/147819539-1167f09b-4114-4e13-a7fe-03ab7bc3528d.gif)
 
 ### Update
-![exUpdate](https://user-images.githubusercontent.com/63037629/147388376-7c257fc4-3191-4c84-8188-2ea3d863172e.gif)
+![update](https://user-images.githubusercontent.com/63037629/147819521-f218b375-60e2-49ef-a9d6-6a841c4ede8e.gif)
 
 ## ⚙ 기타 사항
 
