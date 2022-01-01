@@ -19,7 +19,7 @@
 ### 🧪 구현 현황
 
 - [x] 메인 페이지 디자인, 구현
-- [ ] 그래프 CRUD 기능(추가 기능 완성)
+- [x] 그래프 Create, Update, Delete 기능
 - [ ] Local Storage에 데이터 저장
 - [ ] 마인드 맵 export 기능 구현
 
