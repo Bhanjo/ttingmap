@@ -16,6 +16,10 @@
 
 [페이지 디자인](https://www.figma.com/file/pfrQPY21Q3AMi2Tev4OylE/Untitled?node-id=0%3A1)
 
+## ✨ 데모
+
+[데모 실행](https://ttingmap.vercel.app/)
+
 ### 🧪 구현 현황
 
 - [x] 메인 페이지 디자인, 구현
