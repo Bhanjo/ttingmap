@@ -25,33 +25,42 @@ const InfoTitleSub = styled.p`
   margin-top: 28px;
 `;
 
-const InfoImg = styled.img`
-  width: 594px;
-  height: 362px;
-  border-radius: 18px;
-`;
-
 const InfoList = styled.div`
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1190px) {
     width: 594px;
   }
+  @media only screen and (max-width: 610px) {
+    /* width: 450px; */
+    width: 380px;
+  }
+  max-width: 1190px;
   transition: 1s ease-out;
-  width: ${(props) => (props.isFullSize ? '1190px' : '594px')};
   margin: auto auto 240px;
   div:nth-child(2n) {
-    display: ${(props) => (props.isFullSize ? 'flex' : 'block')};
     flex-direction: row-reverse;
   }
 `;
 
 const InfoItem = styled.div`
-  display: ${(props) => (props.isFullSize ? 'flex' : 'block')};
+  @media only screen and (max-width: 1190px) {
+    justify-content: center;
+  }
+  display: flex;
+  flex-wrap: wrap;
   margin: 83px auto;
   overflow: hidden;
   :first-child,
   :last-child {
     margin: 0;
   }
+`;
+
+const InfoImg = styled.img`
+  @media only screen and (max-width: 610px) {
+    width: 380px;
+  }
+  /* height: 362px; */
+  border-radius: 18px;
 `;
 
 const InfoContents = () => {
@@ -95,7 +104,7 @@ const InfoContents = () => {
         <InfoTitleMain {...animation[0]}>생각을 펼치고 싶다면?</InfoTitleMain>
         <InfoTitleSub {...animation[1]}>띵맵으로 쉽고 간편하게!</InfoTitleSub>
       </InfoTitle>
-      <InfoList isFullSize={isFullSize}>
+      <InfoList>
         {projectIntroduce.map((introduce) => (
           <InfoItem {...introduce.animation} key={introduce.id}>
             <InfoImg src={introduce.projectImg} />
