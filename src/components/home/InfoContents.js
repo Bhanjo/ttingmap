@@ -76,25 +76,25 @@ const InfoContents = () => {
       id: 1,
       animation: useScrollAnimation(isFullSize ? 'left' : 'up', 1.5, 0.2),
       projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '대충설명1',
+      introduceText: '자신의 생각을 표현해보세요',
     },
     {
       id: 2,
       animation: useScrollAnimation(isFullSize ? 'right' : 'up', 1.5, 0.2),
       projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '대충설명2',
+      introduceText: '다양한 스타일링',
     },
     {
       id: 3,
       animation: useScrollAnimation(isFullSize ? 'left' : 'up', 1.5, 0.2),
       projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '대충설명3',
+      introduceText: '마인드맵을 저장해 공유',
     },
     {
       id: 4,
       animation: useScrollAnimation(isFullSize ? 'right' : 'up', 1.5, 0.2),
       projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '대충설명4',
+      introduceText: '간편한 사용',
     },
   ];
 

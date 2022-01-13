@@ -45,17 +45,16 @@ const StartButton = styled(Link)`
   z-index: 1;
   font-size: 30px;
   color: #ffffff;
-  border: 3px #fff solid;
-  border-radius: 24px;
+  border: 2px #eee solid;
+  border-radius: 6px;
   text-decoration-line: none;
 
   /* Button animaition */
-  box-shadow: inset 0 0 0 0 #80ffd3;
   transition: all 0.7s cubic-bezier(0.9, 0.24, 0.4, 1);
-  background: url('../svg/gradation.svg');
-  background-size: cover;
   :hover {
-    box-shadow: inset 0 0 500px 0 #38399e00;
+    /* box-shadow: inset 200px 0 0 0 #92b8b1; */
+    /* box-shadow: inset 200px 0 0 0 #64b9b2; */
+    box-shadow: inset 200px 0 0 0 #00b9b2;
   }
 `;
 
@@ -105,7 +104,7 @@ const Home = () => {
       <WelcomContainer>
         <BrandBox>
           <Brand src='../svg/welcomLogo.svg' />
-          <StartButton to='/mindmap'>start</StartButton>
+          <StartButton to='/mindmap'>START</StartButton>
         </BrandBox>
         <Scroll src='../svg/scroll.svg' />
       </WelcomContainer>
@@ -115,7 +114,7 @@ const Home = () => {
       <MoveBox>
         <MoveBoxInner>
           <p>지금 바로 시작하기</p>
-          <StartButton to='/mindmap'>start</StartButton>
+          <StartButton to='/mindmap'>START</StartButton>
         </MoveBoxInner>
       </MoveBox>
       {/* 컨택트 컴포넌트 */}
