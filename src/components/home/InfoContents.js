@@ -56,6 +56,7 @@ const InfoItem = styled.div`
 `;
 
 const InfoImg = styled.img`
+  width: 594px;
   @media only screen and (max-width: 610px) {
     width: 380px;
   }
@@ -75,7 +76,7 @@ const InfoContents = () => {
     {
       id: 1,
       animation: useScrollAnimation(isFullSize ? 'left' : 'up', 1.5, 0.2),
-      projectImg: 'https://via.placeholder.com/594x362',
+      projectImg: '../svg/ex.svg',
       introduceText: '자신의 생각을 표현해보세요',
     },
     {
