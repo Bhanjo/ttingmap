@@ -23,7 +23,7 @@ const Navigarion = () => {
       <NavElement to='/'>
         <LogoImg src='../svg/NavLogo.svg' alt='메인페이지' />
       </NavElement>
-      <NavElement to='/mindmap'>테스트</NavElement>
+      {/* <NavElement to='/mindmap'>테스트</NavElement> */}
     </NavContainer>
   );
 };
