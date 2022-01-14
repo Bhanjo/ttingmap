@@ -159,7 +159,7 @@ const CytoscapeControl = ({ cyRef }) => {
           />
         )}
       </div>
-      <ExportView />
+      <ExportView cyRef={cyRef} />
     </ControlContainer>
   );
 };

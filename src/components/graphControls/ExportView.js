@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import SubmitButton from '../SubmitButton';
@@ -38,19 +39,35 @@ const ExportTitleBox = styled.div`
   }
 `;
 
-const ExportView = () => {
+const ExportDownLoad = styled.a`
+  img {
+    display: none;
+  }
+`;
+const ExportView = ({ cyRef }) => {
+  const [imgLink, setImgLink] = useState(false);
+  const exporToFile = (e) => {
+    e.preventDefault();
+    setImgLink(!imgLink);
+  };
   return (
     <ExportContainer>
-      <ExportTitleBox>
-        <h1>Export</h1>
-        <select name='exportType'>
-          <option value=''>저장타입</option>
-          <option value='png'>PNG</option>
-          <option value='jpeg'>JPEG</option>
-          <option value='json'>JSON</option>
-        </select>
-      </ExportTitleBox>
-      <SubmitButton type='button' label='export' text='내보내기' />
+      <form onSubmit={exporToFile}>
+        <ExportTitleBox>
+          <h1>Export</h1>
+          <select name='exportType'>
+            <option value=''>저장타입</option>
+            <option value='png'>PNG</option>
+            <option value='jpeg'>JPEG</option>
+            <option value='json'>JSON</option>
+          </select>
+        </ExportTitleBox>
+        <SubmitButton type='submit' label='export' text='내보내기' />
+      </form>
+      <ExportDownLoad href={imgLink && cyRef.current.png()} download='mindmap'>
+        <p>다운로드</p>
+        <img alt='추출이미지' src={imgLink && cyRef.current.png()} />
+      </ExportDownLoad>
     </ExportContainer>
   );
 };
