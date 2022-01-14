@@ -133,7 +133,7 @@ const NodeCreate = ({
             value={newNode}
             onChange={onChangeNewNode}
           />
-          <SubmitButton type='submit' label='test' text='추가' />
+          <SubmitButton type='submit' label='add' text='추가' />
         </FormBox>
       ) : (
         // 노드연결하기
@@ -156,7 +156,7 @@ const NodeCreate = ({
             name='endNode'
             readOnly
           />
-          <SubmitButton type='submit' label='test' text='연결' />
+          <SubmitButton type='submit' label='connect' text='연결' />
         </FormBox>
       )}
     </div>

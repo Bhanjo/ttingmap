@@ -19,9 +19,9 @@ const ButtonBox = styled.button`
   }
 `;
 
-const SubmitButton = ({ type, text }) => {
+const SubmitButton = ({ type, label, text }) => {
   return (
-    <ButtonBox type={type} label='submit'>
+    <ButtonBox type={type} label={label}>
       {text}
     </ButtonBox>
   );

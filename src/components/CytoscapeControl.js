@@ -8,6 +8,7 @@ import {
   targetNodeInputState,
   isModeNode,
 } from './globalState/nodeControl';
+import ExportView from './graphControls/ExportView';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';
 import NodeUpdate from './graphControls/NodeUpdate';
@@ -158,6 +159,7 @@ const CytoscapeControl = ({ cyRef }) => {
           />
         )}
       </div>
+      <ExportView />
     </ControlContainer>
   );
 };
