@@ -52,18 +52,19 @@ const ExportView = ({ cyRef }) => {
 
   // 다운로드 설정
   const imgOption = { bg: '#ddd' };
-  const [exportType, setExportType] = useState('');
+  const [exportType, setExportType] = useState();
 
   const handleExportType = (e) => {
-    if (e.target.value === 'png') setExportType(cyRef.current.png(imgOption));
+    if (e.target.value === 'png' || e.target.value === '')
+      setExportType(cyRef.current.png(imgOption));
     else if (e.target.value === 'jpg')
       setExportType(cyRef.current.jpg(imgOption));
     else if (e.target.value === 'json') setExportType(cyRef.current.json());
   };
 
   const exporToFile = (e) => {
-    e.preventDefault();
     setExportLink(!exportLink);
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -79,6 +80,7 @@ const ExportView = ({ cyRef }) => {
         <ExportTitleBox>
           <h1>Export</h1>
           <select onChange={handleExportType}>
+            <option value=''>파일 형식</option>
             <option value='png'>PNG</option>
             <option value='jpg'>JPG</option>
             {/* <option value='json'>JSON</option> */}

@@ -28,7 +28,7 @@ const ControlContainer = styled.div`
     bottom: 0;
     width: 100%;
     height: auto;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 `;
 
