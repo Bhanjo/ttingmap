@@ -5,7 +5,8 @@ const GlobalStyle = createGlobalStyle`
     ${reset};
     @font-face {
       font-family: 'NanumGothic';
-      src: url(${'/fonts/NanumGothicBold.otf'});
+      /* src: url(${'/fonts/NanumGothicBold.otf'}); */
+      src: url(${'/fonts/NanumGothic.otf'});
     }
     body{
         padding: 0;

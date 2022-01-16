@@ -8,6 +8,9 @@ const NodeInputBox = styled.input`
   margin: 0 auto 12px auto;
   border: none;
   border-radius: 3px;
+  :focus {
+    box-shadow: inset 0 0 2px #383838;
+  }
 `;
 
 const InputBox = ({

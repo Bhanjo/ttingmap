@@ -52,8 +52,6 @@ const StartButton = styled(Link)`
   /* Button animaition */
   transition: all 0.7s cubic-bezier(0.9, 0.24, 0.4, 1);
   :hover {
-    /* box-shadow: inset 200px 0 0 0 #92b8b1; */
-    /* box-shadow: inset 200px 0 0 0 #64b9b2; */
     box-shadow: inset 200px 0 0 0 #00b9b2;
   }
 `;
