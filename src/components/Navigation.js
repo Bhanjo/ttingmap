@@ -6,11 +6,19 @@ const NavContainer = styled.div`
   align-items: center;
   padding: 10px 50px;
   background-color: #383838;
+  justify-content: space-between;
 `;
 
 const NavElement = styled(Link)`
   cursor: pointer;
   color: #fff;
+  margin: 0 10px;
+`;
+
+const ExternalLink = styled.a`
+  cursor: pointer;
+  color: #fff;
+  margin: 0 10px;
 `;
 
 const LogoImg = styled.img`
@@ -23,7 +31,15 @@ const Navigarion = () => {
       <NavElement to='/'>
         <LogoImg src='../svg/NavLogo.svg' alt='메인페이지' />
       </NavElement>
-      {/* <NavElement to='/mindmap'>테스트</NavElement> */}
+      <div>
+        <NavElement to='/mindmap'>마인드맵</NavElement>
+        <ExternalLink
+          href='https://github.com/Bhanjo/ttingmap/tree/main/public/guide.md'
+          target='_blank'
+        >
+          사용법
+        </ExternalLink>
+      </div>
     </NavContainer>
   );
 };

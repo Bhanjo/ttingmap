@@ -129,7 +129,7 @@ const NodeCreate = ({
         <FormBox onSubmit={onNewGraph}>
           <InputBox
             type='text'
-            placeholder='ex: 프로젝트 만들기'
+            placeholder='새로운 노드 만들기'
             value={newNode}
             onChange={onChangeNewNode}
           />
