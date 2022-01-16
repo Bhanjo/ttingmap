@@ -16,8 +16,7 @@ const Container = styled.div`
 const GraphBox = styled(CytoscapeComponent)`
   width: 100%;
   height: 100vh;
-  /* border: 1px solid #000; */
-  background-color: #ddd;
+  background-color: #f9f9f9;
 `;
 
 const MindMap = () => {
@@ -92,8 +91,32 @@ const MindMap = () => {
 
   // cytoscape DOM을 다루기 위한 ref
   const cyRef = useRef();
+  const stylesheet = [
+    {
+      selector: 'node',
+      style: {
+        'background-color': '#5D5FEF',
+        label: 'data(label)',
+      },
+    },
+    {
+      selector: 'edge',
+      style: {
+        width: 3,
+        'line-color': '#A3A4FF',
+      },
+    },
+    // {
+    //   selector: 'label',
+    //   style: {
+    //     'font-size': '20px',
+    //     'text-justification': 'center',
+    //     // 'text-outline-width': '1px',
+    //     // 'text-outline-color': '#fff',
+    //   },
+    // },
+  ];
 
-  // 노드 연결 기능 구현필요
   return (
     <Container>
       <Navigation />
@@ -103,6 +126,7 @@ const MindMap = () => {
         minZoom={0.3}
         // eslint-disable-next-line no-return-assign
         cy={(cy) => (cyRef.current = cy)}
+        stylesheet={stylesheet}
       />
       {/* 그래프 컨트롤 컴포넌트 */}
       <CytoscapeControl cyRef={cyRef} />

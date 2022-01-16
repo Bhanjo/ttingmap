@@ -16,6 +16,7 @@ const ExportTitleBox = styled.div`
   margin: 11px 0;
   h1 {
     color: #5d5fef;
+    font-weight: bold;
   }
   select {
     border: 1px solid white;

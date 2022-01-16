@@ -21,6 +21,7 @@ const ControlContainer = styled.div`
   width: 250px;
   height: 100vh;
   padding-top: 1rem;
+  border-left: 1px solid #eee;
 `;
 
 const ControlCategory = styled.ul`
@@ -40,6 +41,7 @@ const ControlCategryModeLabel = styled.label`
   cursor: pointer;
   ${ControlCategoryMode}:checked ~ & {
     border-bottom: 3px solid #5d5fef;
+    font-weight: bold;
   }
 `;
 

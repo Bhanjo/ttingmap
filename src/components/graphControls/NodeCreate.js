@@ -51,24 +51,6 @@ const NodeCreate = ({
     });
   };
 
-  // 노드 추가 이벤트
-  const onNewGraph = (e) => {
-    const item = {
-      data: {
-        id: nodeIdCounter.current,
-        label: newNode,
-      },
-      position: {
-        x: 600,
-        y: 600,
-      },
-    };
-    e.preventDefault();
-    cyRef.current.add(item);
-    countNodeIdCounter();
-    setNewNode('');
-  };
-
   // 노드 연결 이벤트
   const onConnectGraph = (e) => {
     const newConnect = {
@@ -119,6 +101,35 @@ const NodeCreate = ({
       cy.on('tap', 'node', nodeClickHandler);
     };
   }, [cyRef, nodeClickHandler]);
+
+  // 노드 추가 이벤트
+  const onNewGraph = (e) => {
+    const item = {
+      data: {
+        id: nodeIdCounter.current,
+        label: newNode,
+      },
+      position: {
+        x: 50,
+        y: 600,
+      },
+    };
+    e.preventDefault();
+    cyRef.current.add(item);
+
+    // const findNode = cyRef.current.$(`[id = "${item.data.id}"]`);
+    // findNode.animate(
+    //   {
+    //     style: { 'background-color': '#5D5FEF' },
+    //   },
+    //   {
+    //     duration: 400,
+    //   },
+    // );
+
+    countNodeIdCounter();
+    setNewNode('');
+  };
 
   return (
     <div>
