@@ -16,6 +16,7 @@ const ExportTitleBox = styled.div`
   margin: 11px 0;
   h1 {
     color: #5d5fef;
+    font-weight: bold;
   }
   select {
     border: 1px solid white;
@@ -50,19 +51,25 @@ const ExportView = ({ cyRef }) => {
   const downloadRef = useRef();
 
   // 다운로드 설정
-  const imgOption = { bg: '#ddd' };
-  const [exportType, setExportType] = useState('');
+  const imgOption = { bg: '#f9f9f9' };
+  const [exportType, setExportType] = useState();
 
   const handleExportType = (e) => {
-    if (e.target.value === 'png') setExportType(cyRef.current.png(imgOption));
+    if (e.target.value === 'png' || e.target.value === '')
+      setExportType(cyRef.current.png(imgOption));
     else if (e.target.value === 'jpg')
       setExportType(cyRef.current.jpg(imgOption));
     else if (e.target.value === 'json') setExportType(cyRef.current.json());
   };
 
   const exporToFile = (e) => {
+    if (exportType == null) {
+      // eslint-disable-next-line no-alert
+      alert('파일 형식을 선택해 주세요!');
+    } else {
+      setExportLink(!exportLink);
+    }
     e.preventDefault();
-    setExportLink(!exportLink);
   };
 
   useEffect(() => {
@@ -78,6 +85,7 @@ const ExportView = ({ cyRef }) => {
         <ExportTitleBox>
           <h1>Export</h1>
           <select onChange={handleExportType}>
+            <option value=''>파일 형식</option>
             <option value='png'>PNG</option>
             <option value='jpg'>JPG</option>
             {/* <option value='json'>JSON</option> */}

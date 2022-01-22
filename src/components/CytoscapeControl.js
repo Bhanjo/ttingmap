@@ -20,7 +20,16 @@ const ControlContainer = styled.div`
   right: 0;
   width: 250px;
   height: 100vh;
-  padding-top: 1rem;
+  padding: 1rem 0;
+  border-left: 1px solid #eee;
+  @media screen and (max-width: 768px) {
+    /* position: static; */
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    /* overflow-y: scroll; */
+  }
 `;
 
 const ControlCategory = styled.ul`
@@ -40,6 +49,7 @@ const ControlCategryModeLabel = styled.label`
   cursor: pointer;
   ${ControlCategoryMode}:checked ~ & {
     border-bottom: 3px solid #5d5fef;
+    font-weight: bold;
   }
 `;
 
