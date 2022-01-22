@@ -51,7 +51,7 @@ const ExportView = ({ cyRef }) => {
   const downloadRef = useRef();
 
   // 다운로드 설정
-  const imgOption = { bg: '#ddd' };
+  const imgOption = { bg: '#f9f9f9' };
   const [exportType, setExportType] = useState();
 
   const handleExportType = (e) => {
@@ -63,7 +63,12 @@ const ExportView = ({ cyRef }) => {
   };
 
   const exporToFile = (e) => {
-    setExportLink(!exportLink);
+    if (exportType == null) {
+      // eslint-disable-next-line no-alert
+      alert('파일 형식을 선택해 주세요!');
+    } else {
+      setExportLink(!exportLink);
+    }
     e.preventDefault();
   };
 
