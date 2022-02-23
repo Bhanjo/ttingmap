@@ -111,6 +111,14 @@ const CytoscapeControl = ({ cyRef }) => {
     }
   }, [cyRef, inputType, nodeClickHandler]);
 
+  // JSON 테스트
+  const handleJSON = () => {
+    localStorage.setItem('graphs', JSON.stringify(cyRef.current.json()));
+    const info = localStorage.getItem('graphs');
+    const parseInfo = JSON.parse(info);
+    console.log(parseInfo);
+  };
+
   return (
     <ControlContainer>
       <div>
@@ -170,6 +178,11 @@ const CytoscapeControl = ({ cyRef }) => {
         )}
       </div>
       <ExportView cyRef={cyRef} />
+
+      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+      {/* <button type='button' name='json' onClick={handleJSON}>
+        JSON테스트
+      </button> */}
     </ControlContainer>
   );
 };
