@@ -180,9 +180,9 @@ const CytoscapeControl = ({ cyRef }) => {
       <ExportView cyRef={cyRef} />
 
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <button type='button' name='json' onClick={handleJSON}>
+      {/* <button type='button' name='json' onClick={handleJSON}>
         JSON테스트
-      </button>
+      </button> */}
     </ControlContainer>
   );
 };
