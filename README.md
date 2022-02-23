@@ -1,4 +1,4 @@
-# 띵맵
+# TTingmap
 
 <img src='./public/logo.svg' width='1000px' height='500px'/>
 
@@ -35,6 +35,7 @@
 - recoil
 - Styled-Component, Styled-reset
 - React-Router-Dom
+- react-helmet
 
 ## 💎 핵심 기능
 
