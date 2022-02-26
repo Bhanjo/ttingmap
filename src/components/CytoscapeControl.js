@@ -7,11 +7,13 @@ import {
   nodeInputState,
   targetNodeInputState,
   isModeNode,
+  currentNodeId,
 } from './globalState/nodeControl';
 import ExportView from './graphControls/ExportView';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';
 import NodeUpdate from './graphControls/NodeUpdate';
+import SaveControl from './graphControls/SaveControl';
 
 const ControlContainer = styled.div`
   background-color: #fff;
@@ -64,6 +66,9 @@ const CytoscapeControl = ({ cyRef }) => {
   const inputType = useRecoilValue(isModeNode);
   const [nodeId, setNodeId] = useRecoilState(nodeInputState);
   const [targetNode, setTargetNode] = useRecoilState(targetNodeInputState);
+
+  // 노드 개수를 입력받아 업데이트하기
+  // const [currentId, setCurrentId] = useRecoilState(currentNodeId);
   const nodeIdCounter = useRef(5);
 
   // CRUD 타입 결정
@@ -90,6 +95,7 @@ const CytoscapeControl = ({ cyRef }) => {
   };
 
   const countNodeIdCounter = () => {
+    // setCurrentId(currentId + 1);
     nodeIdCounter.current += 1;
   };
 
@@ -111,16 +117,9 @@ const CytoscapeControl = ({ cyRef }) => {
     }
   }, [cyRef, inputType, nodeClickHandler]);
 
-  // JSON 테스트
-  const handleJSON = () => {
-    localStorage.setItem('graphs', JSON.stringify(cyRef.current.json()));
-    const info = localStorage.getItem('graphs');
-    const parseInfo = JSON.parse(info);
-    console.log(parseInfo);
-  };
-
   return (
     <ControlContainer>
+      <SaveControl cyRef={cyRef} />
       <div>
         {/* 컨트롤 카테고리 컴포넌트화 시키기 */}
         <ControlCategory>
@@ -178,11 +177,6 @@ const CytoscapeControl = ({ cyRef }) => {
         )}
       </div>
       <ExportView cyRef={cyRef} />
-
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      {/* <button type='button' name='json' onClick={handleJSON}>
-        JSON테스트
-      </button> */}
     </ControlContainer>
   );
 };

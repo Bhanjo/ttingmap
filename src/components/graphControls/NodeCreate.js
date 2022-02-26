@@ -26,6 +26,7 @@ const NodeCreate = ({
   nodeClickHandler,
 }) => {
   const [insertType, setInsertType] = useRecoilState(isModeNode);
+  // const [addNodeId, setAddNodeId] = useRecoilState(currentNodeId);
   const [newNode, setNewNode] = useState('');
   let isExist = true;
 
@@ -127,6 +128,7 @@ const NodeCreate = ({
     //   },
     // );
 
+    // setAddNodeId(addNodeId + 1);
     countNodeIdCounter();
     setNewNode('');
   };

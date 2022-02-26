@@ -1,10 +1,12 @@
 /* eslint-disable no-console */
 import { useEffect, useRef } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import CytoscapeControl from '../components/CytoscapeControl';
 import Navigation from '../components/Navigation';
+import { currentNodeId } from '../components/globalState/nodeControl';
 
 const Container = styled.div`
   height: 100vh;
@@ -116,6 +118,18 @@ const MindMap = () => {
     //   },
     // },
   ];
+
+  // 페이지 로드시 그래프 불러오기
+  const [nodeCnt, setNodeCnt] = useRecoilState(currentNodeId);
+  useEffect(() => {
+    const graph = JSON.parse(localStorage.getItem('graphs'));
+    if (graph) {
+      cyRef.current.json(graph);
+      // 노드 id 업데이트
+      const nodeLength = graph.elements.nodes;
+      if (nodeLength) setNodeCnt(nodeLength.length);
+    }
+  }, [setNodeCnt]);
 
   return (
     <Container>
