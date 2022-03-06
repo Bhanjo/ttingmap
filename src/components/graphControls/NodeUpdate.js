@@ -10,7 +10,7 @@ const FormBox = styled.form`
   align-items: center;
 `;
 
-const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId }) => {
+const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId, saveGraph }) => {
   const [updateName, setUpdateName] = useState('');
 
   const onChangeNode = (e) => {
@@ -26,7 +26,9 @@ const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId }) => {
     e.preventDefault();
     const findNode = cyRef.current.$(`[id = "${nodeId}"]`);
     findNode.data('label', updateName);
+
     setUpdateName('');
+    saveGraph();
   };
 
   return (

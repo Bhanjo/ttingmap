@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import InputBox from '../InputBox';
 import NodeEdgeChange from '../NodeEdgeChange';
 import SubmitButton from '../SubmitButton';
-import { isModeNode } from '../globalState/nodeControl';
+import { isModeNode, currentNodeId } from '../globalState/nodeControl';
 
 const FormBox = styled.form`
   display: flex;
@@ -22,8 +22,10 @@ const NodeDelete = ({
   onChangeTargetNode,
   initTargetNode,
   nodeClickHandler,
+  saveGraph,
 }) => {
   const [removeType, setRemoveType] = useRecoilState(isModeNode);
+  const [updateNodeId, setUpdateNodeId] = useRecoilState(currentNodeId);
 
   const onChangeRemoveNode = (e) => {
     onChangeNodeId(e.target.value);
@@ -46,15 +48,24 @@ const NodeDelete = ({
     e.preventDefault();
     const findNode = cyRef.current.$(`[id = "${nodeId}"]`);
     cyRef.current.remove(findNode);
+
+    // 삭제시 노드 id 카운터를 마지막 노드 id + 1로 변경
+    const lastNodeIndex = cyRef.current.elements().length - 1;
+    const lastNode = cyRef.current.elements()[lastNodeIndex];
+    setUpdateNodeId(Number(lastNode.data('id')) + 1);
+
     initNode();
+    saveGraph();
   };
 
   // edge삭제 이벤트
   const onRemoveEdge = (e) => {
     e.preventDefault();
     cyRef.current.remove(`edge[source = "${nodeId}"][target= "${targetNode}"]`);
+
     initNode();
     initTargetNode();
+    saveGraph();
   };
 
   useEffect(() => {
