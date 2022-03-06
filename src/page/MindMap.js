@@ -25,69 +25,69 @@ const MindMap = () => {
   // 초기값
   const elements = {
     nodes: [
-      {
-        data: {
-          id: '1',
-          label: '노드1',
-        },
-        position: {
-          x: 340,
-          y: 250,
-        },
-      },
-      {
-        data: {
-          id: '2',
-          label: '노드2',
-        },
-        position: {
-          x: 440,
-          y: 360,
-        },
-      },
-      {
-        data: {
-          id: '3',
-          label: '노드3',
-        },
-        position: {
-          x: 140,
-          y: 360,
-        },
-      },
-      {
-        data: {
-          id: '4',
-          label: '노드4',
-        },
-        position: {
-          x: 240,
-          y: 360,
-        },
-      },
+      // {
+      //   data: {
+      //     id: '1',
+      //     label: '노드1',
+      //   },
+      //   position: {
+      //     x: 340,
+      //     y: 250,
+      //   },
+      // },
+      // {
+      //   data: {
+      //     id: '2',
+      //     label: '노드2',
+      //   },
+      //   position: {
+      //     x: 440,
+      //     y: 360,
+      //   },
+      // },
+      // {
+      //   data: {
+      //     id: '3',
+      //     label: '노드3',
+      //   },
+      //   position: {
+      //     x: 140,
+      //     y: 360,
+      //   },
+      // },
+      // {
+      //   data: {
+      //     id: '4',
+      //     label: '노드4',
+      //   },
+      //   position: {
+      //     x: 240,
+      //     y: 360,
+      //   },
+      // },
     ],
     edges: [
-      {
-        data: {
-          source: '1',
-          target: '2',
-          label: 'edge from node1 to node3',
-        },
-      },
-      {
-        data: {
-          source: '1',
-          target: '3',
-          label: 'edge from node1 to node3',
-        },
-      },
-      {
-        data: {
-          source: '1',
-          target: '4',
-          label: 'edge from node1 to node3',
-        },
-      },
+      // {
+      //   data: {
+      //     source: '1',
+      //     target: '2',
+      //     label: 'edge from node1 to node3',
+      //   },
+      // },
+      // {
+      //   data: {
+      //     source: '1',
+      //     target: '3',
+      //     label: 'edge from node1 to node3',
+      //   },
+      // },
+      // {
+      //   data: {
+      //     source: '1',
+      //     target: '4',
+      //     label: 'edge from node1 to node3',
+      //   },
+      // },
     ],
   };
 
@@ -126,8 +126,9 @@ const MindMap = () => {
     if (graph) {
       cyRef.current.json(graph);
       // 노드 id 업데이트
-      const nodeLength = graph.elements.nodes;
-      if (nodeLength) setNodeCnt(nodeLength.length);
+      const lastNodeIndex = cyRef.current.elements().length - 1;
+      const lastNode = cyRef.current.elements()[lastNodeIndex];
+      setNodeCnt(Number(lastNode.data('id')) + 1);
     }
   }, [setNodeCnt]);
 

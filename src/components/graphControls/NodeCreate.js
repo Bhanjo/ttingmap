@@ -6,13 +6,7 @@ import styled from 'styled-components';
 import InputBox from '../InputBox';
 import NodeEdgeChange from '../NodeEdgeChange';
 import SubmitButton from '../SubmitButton';
-import { isModeNode } from '../globalState/nodeControl';
-
-const FormBox = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import { isModeNode, currentNodeId } from '../globalState/nodeControl';
 
 const NodeCreate = ({
   cyRef,
@@ -21,13 +15,12 @@ const NodeCreate = ({
   targetNode,
   onChangeTargetNode,
   initTargetNode,
-  nodeIdCounter,
-  countNodeIdCounter,
   nodeClickHandler,
+  saveGraph,
 }) => {
   const [insertType, setInsertType] = useRecoilState(isModeNode);
-  // const [addNodeId, setAddNodeId] = useRecoilState(currentNodeId);
   const [newNode, setNewNode] = useState('');
+  const [newNodeId, setNewNodeId] = useRecoilState(currentNodeId);
   let isExist = true;
 
   // form 내용 변경 감지
@@ -46,30 +39,8 @@ const NodeCreate = ({
   const insertIsExist = (...item) => {
     isExist = true;
     item.forEach((node) => {
-      if (cyRef.current.getElementById(node).length === 0) {
-        isExist = false;
-      }
+      if (cyRef.current.getElementById(node).length === 0) isExist = false;
     });
-  };
-
-  // 노드 연결 이벤트
-  const onConnectGraph = (e) => {
-    const newConnect = {
-      data: {
-        source: nodeId,
-        target: targetNode,
-        label: `edge from ${nodeId} to ${targetNode}`,
-      },
-    };
-    e.preventDefault();
-    insertIsExist(nodeId, targetNode);
-    if (isExist) {
-      cyRef.current.add(newConnect);
-      onChangeToNode('');
-      initTargetNode();
-    } else {
-      alert(`입력값을 다시 확인해주세요`);
-    }
   };
 
   // 입력모드 변경 이벤트
@@ -107,7 +78,7 @@ const NodeCreate = ({
   const onNewGraph = (e) => {
     const item = {
       data: {
-        id: nodeIdCounter.current,
+        id: newNodeId,
         label: newNode,
       },
       position: {
@@ -117,20 +88,28 @@ const NodeCreate = ({
     };
     e.preventDefault();
     cyRef.current.add(item);
-
-    // const findNode = cyRef.current.$(`[id = "${item.data.id}"]`);
-    // findNode.animate(
-    //   {
-    //     style: { 'background-color': '#5D5FEF' },
-    //   },
-    //   {
-    //     duration: 400,
-    //   },
-    // );
-
-    // setAddNodeId(addNodeId + 1);
-    countNodeIdCounter();
+    setNewNodeId(newNodeId + 1);
     setNewNode('');
+    saveGraph();
+  };
+
+  // 노드 연결 이벤트
+  const onConnectGraph = (e) => {
+    const newConnect = {
+      data: {
+        source: nodeId,
+        target: targetNode,
+        label: `edge from ${nodeId} to ${targetNode}`,
+      },
+    };
+    e.preventDefault();
+    insertIsExist(nodeId, targetNode);
+    if (isExist) {
+      cyRef.current.add(newConnect);
+      onChangeToNode('');
+      initTargetNode();
+    } else alert(`입력값을 다시 확인해주세요`);
+    saveGraph();
   };
 
   return (
@@ -175,5 +154,11 @@ const NodeCreate = ({
     </div>
   );
 };
+
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default NodeCreate;

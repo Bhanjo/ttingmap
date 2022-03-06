@@ -7,53 +7,12 @@ import {
   nodeInputState,
   targetNodeInputState,
   isModeNode,
-  currentNodeId,
 } from './globalState/nodeControl';
 import ExportView from './graphControls/ExportView';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';
 import NodeUpdate from './graphControls/NodeUpdate';
 import SaveControl from './graphControls/SaveControl';
-
-const ControlContainer = styled.div`
-  background-color: #fff;
-  position: absolute;
-  top: 50px;
-  right: 0;
-  width: 250px;
-  height: 100vh;
-  padding: 1rem 0;
-  border-left: 1px solid #eee;
-  @media screen and (max-width: 768px) {
-    /* position: static; */
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    height: auto;
-    /* overflow-y: scroll; */
-  }
-`;
-
-const ControlCategory = styled.ul`
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  margin-bottom: 25px;
-`;
-
-const ControlCategoryMode = styled.input`
-  margin: 0 0.5rem;
-  cursor: pointer;
-`;
-
-const ControlCategryModeLabel = styled.label`
-  margin: 0 0.5rem;
-  cursor: pointer;
-  ${ControlCategoryMode}:checked ~ & {
-    border-bottom: 3px solid #5d5fef;
-    font-weight: bold;
-  }
-`;
 
 const CytoscapeControl = ({ cyRef }) => {
   // 전체 컨트롤 모드
@@ -94,11 +53,6 @@ const CytoscapeControl = ({ cyRef }) => {
     setTargetNode(value);
   };
 
-  const countNodeIdCounter = () => {
-    // setCurrentId(currentId + 1);
-    nodeIdCounter.current += 1;
-  };
-
   // 노드 클릭 이벤트
   const nodeClickHandler = useCallback(
     (e) => {
@@ -107,6 +61,10 @@ const CytoscapeControl = ({ cyRef }) => {
     },
     [setNodeId],
   );
+
+  const saveGraph = () => {
+    localStorage.setItem('graphs', JSON.stringify(cyRef.current.json()));
+  };
 
   useEffect(() => {
     const cy = cyRef.current;
@@ -149,11 +107,10 @@ const CytoscapeControl = ({ cyRef }) => {
             nodeId={nodeId}
             onChangeNodeId={onChangeNodeId}
             targetNode={targetNode}
-            nodeIdCounter={nodeIdCounter}
-            countNodeIdCounter={countNodeIdCounter}
             onChangeTargetNode={onChangeTargetNode}
             initTargetNode={initTargetNode}
             nodeClickHandler={nodeClickHandler}
+            saveGraph={saveGraph}
           />
         )}
         {currentMode === 'delete' && (
@@ -166,6 +123,7 @@ const CytoscapeControl = ({ cyRef }) => {
             onChangeTargetNode={onChangeTargetNode}
             initTargetNode={initTargetNode}
             nodeClickHandler={nodeClickHandler}
+            saveGraph={saveGraph}
           />
         )}
         {currentMode === 'update' && (
@@ -173,6 +131,7 @@ const CytoscapeControl = ({ cyRef }) => {
             cyRef={cyRef}
             nodeId={nodeId}
             onChangeNodeId={onChangeNodeId}
+            saveGraph={saveGraph}
           />
         )}
       </div>
@@ -180,5 +139,45 @@ const CytoscapeControl = ({ cyRef }) => {
     </ControlContainer>
   );
 };
+
+const ControlContainer = styled.div`
+  background-color: #fff;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 250px;
+  height: 100vh;
+  padding: 1rem 0;
+  border-left: 1px solid #eee;
+  @media screen and (max-width: 768px) {
+    /* position: static; */
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    /* overflow-y: scroll; */
+  }
+`;
+
+const ControlCategory = styled.ul`
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 25px;
+`;
+
+const ControlCategoryMode = styled.input`
+  margin: 0 0.5rem;
+  cursor: pointer;
+`;
+
+const ControlCategryModeLabel = styled.label`
+  margin: 0 0.5rem;
+  cursor: pointer;
+  ${ControlCategoryMode}:checked ~ & {
+    border-bottom: 3px solid #5d5fef;
+    font-weight: bold;
+  }
+`;
 
 export default CytoscapeControl;

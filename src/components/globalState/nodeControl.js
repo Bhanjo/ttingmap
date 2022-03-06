@@ -20,5 +20,5 @@ export const isModeNode = atom({
 
 export const currentNodeId = atom({
   key: 'currentNodeId',
-  default: 5,
+  default: 0,
 });
