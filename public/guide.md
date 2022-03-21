@@ -1,6 +1,6 @@
-TTingmap 사용법 (22.03.21 추가)
+# TTingmap 사용법 (22.03.21 추가)
 
-# 기본 사용 방법
+## 기본 사용 방법
 
 ### 그래프 이동, 선택
 ![interection](https://user-images.githubusercontent.com/63037629/147819448-804c8a67-f1e9-4ec5-b8cd-500b8ffe2a1d.gif)
