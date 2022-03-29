@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import InputBox from '../InputBox';
 import NodeEdgeChange from '../NodeEdgeChange';
+import NodeIdCheck from '../NodeIdCheck';
 import SubmitButton from '../SubmitButton';
 import { isModeNode, currentNodeId } from '../globalState/nodeControl';
 
@@ -48,11 +49,7 @@ const NodeDelete = ({
     e.preventDefault();
     const findNode = cyRef.current.$(`[id = "${nodeId}"]`);
     cyRef.current.remove(findNode);
-
-    // 삭제시 노드 id 카운터를 마지막 노드 id + 1로 변경
-    const lastNodeIndex = cyRef.current.elements().length - 1;
-    const lastNode = cyRef.current.elements()[lastNodeIndex];
-    setUpdateNodeId(Number(lastNode.data('id')) + 1);
+    NodeIdCheck(cyRef, setUpdateNodeId);
 
     initNode();
     saveGraph();
