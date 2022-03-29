@@ -24,8 +24,9 @@
 
 - [x] 메인 페이지 디자인, 구현
 - [x] 그래프 Create, Update, Delete 기능
-- [ ] Local Storage에 데이터 저장
+- [x] Local Storage에 데이터 저장
 - [x] 마인드 맵 export 기능 구현
+- [ ] 그래프 스타일링
 
 ## 🛠 사용기술
 
