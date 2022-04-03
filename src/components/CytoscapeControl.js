@@ -26,10 +26,6 @@ const CytoscapeControl = ({ cyRef }) => {
   const [nodeId, setNodeId] = useRecoilState(nodeInputState);
   const [targetNode, setTargetNode] = useRecoilState(targetNodeInputState);
 
-  // 노드 개수를 입력받아 업데이트하기
-  // const [currentId, setCurrentId] = useRecoilState(currentNodeId);
-  const nodeIdCounter = useRef(5);
-
   // CRUD 타입 결정
   const handleMode = (mode) => {
     setNodeId('');
