@@ -8,6 +8,7 @@ const NodeInputBox = styled.input`
   margin: 0 auto 12px auto;
   border: none;
   border-radius: 3px;
+  display: ${(props) => (props.hidden ? 'hidden' : 'block')};
   :focus {
     box-shadow: inset 0 0 2px #383838;
   }
@@ -21,6 +22,7 @@ const InputBox = ({
   name,
   onFocus,
   readOnly,
+  hidden,
 }) => {
   return (
     <NodeInputBox
@@ -31,6 +33,7 @@ const InputBox = ({
       onChange={onChange}
       onFocus={onFocus || null}
       readOnly={readOnly}
+      hidden={hidden}
     />
   );
 };

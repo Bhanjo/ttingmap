@@ -64,11 +64,8 @@ const CytoscapeControl = ({ cyRef }) => {
 
   useEffect(() => {
     const cy = cyRef.current;
-    if (inputType) {
-      cy.on('tap', 'node', nodeClickHandler);
-    } else {
-      cy.removeListener('tap', nodeClickHandler);
-    }
+    if (inputType) cy.on('tap', 'node', nodeClickHandler);
+    else cy.removeListener('tap', nodeClickHandler);
   }, [cyRef, inputType, nodeClickHandler]);
 
   return (
