@@ -25,14 +25,14 @@ const SaveControl = ({ cyRef }) => {
   return (
     <Container>
       <ControlButton onClick={saveGraph}>
-        <img src='../svg/save.png' alt='저장' />
+        <p>저장</p>
       </ControlButton>
       {/* 로드 기능의 경우 그래프 그룹화 구현 후 만들기 */}
       {/* <ControlButton onClick={loadGraph}>
         <img src='../svg/save.png' alt='로드' />
       </ControlButton> */}
       <ControlButton onClick={initGraph}>
-        <img src='../svg/init.png' alt='초기화' />
+        <p>리셋</p>
       </ControlButton>
     </Container>
   );
@@ -48,19 +48,19 @@ const Container = styled.div`
 `;
 
 const ControlButton = styled.span`
-  width: 23px;
-  height: 23px;
-  margin: 0 3px;
+  width: 40px;
+  margin: 0 6px;
+  padding: 6px 0;
   transition: 0.3s;
-  border-radius: 12px;
-  padding: 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   :hover {
-    border-radius: 3px;
-    background-color: #dfdfdf;
-  }
-  img {
-    width: inherit;
-    height: inherit;
+    background-color: #898bff;
+    font-weight: bold;
+    color: #fff;
   }
 `;
 

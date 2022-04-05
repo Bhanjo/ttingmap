@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-alert */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -21,6 +23,10 @@ const NodeCreate = ({
   const [insertType, setInsertType] = useRecoilState(isModeNode);
   const [newNode, setNewNode] = useState('');
   const [newNodeId, setNewNodeId] = useRecoilState(currentNodeId);
+  const [startNodeName, setStartNodeName] = useState('시작노드');
+  const [endNodeName, setEndNodeName] = useState('끝노드');
+  const startRef = useRef();
+  const endRef = useRef();
   let isExist = true;
 
   // form 내용 변경 감지
@@ -74,6 +80,14 @@ const NodeCreate = ({
     };
   }, [cyRef, nodeClickHandler]);
 
+  // 연결할 노드의 라벨 표시
+  useEffect(() => {
+    const startNode = cyRef.current.$(`[id="${nodeId}"]`);
+    const endNode = cyRef.current.$(`[id="${targetNode}"]`);
+    setStartNodeName(startNode.data('label'));
+    setEndNodeName(endNode.data('label'));
+  }, [cyRef, nodeId, targetNode]);
+
   // 노드 추가 이벤트
   const onNewGraph = (e) => {
     const item = {
@@ -93,6 +107,13 @@ const NodeCreate = ({
     saveGraph();
   };
 
+  // p태그 클릭시 input 포커스
+  const handleStartInput = () => {
+    startRef.current.focus();
+  };
+  const handleEndInput = () => {
+    endRef.current.focus();
+  };
   // 노드 연결 이벤트
   const onConnectGraph = (e) => {
     const newConnect = {
@@ -130,6 +151,8 @@ const NodeCreate = ({
       ) : (
         // 노드연결하기
         <FormBox onSubmit={onConnectGraph}>
+          <p onClick={handleStartInput}>{startNodeName}</p>
+          <p onClick={handleEndInput}>{endNodeName}</p>
           <InputBox
             type='text'
             placeholder='시작요소'
@@ -137,7 +160,9 @@ const NodeCreate = ({
             onChange={onChangeToNode}
             onFocus={onFocusToNode}
             name='startNode'
+            refs={startRef}
             readOnly
+            height='0'
           />
           <InputBox
             type='text'
@@ -146,7 +171,9 @@ const NodeCreate = ({
             onChange={onChangeFromNode}
             onFocus={onFocusToNode}
             name='endNode'
+            refs={endRef}
             readOnly
+            height='0'
           />
           <SubmitButton type='submit' label='connect' text='연결' />
         </FormBox>
@@ -159,6 +186,17 @@ const FormBox = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  p {
+    border-radius: 3px;
+    background-color: #f6f6f6;
+    box-shadow: inset 0 0 2px #00000040;
+    padding: 6px;
+    margin: 5px 0;
+    width: 180px;
+    min-height: 15px;
+    text-align: left;
+    cursor: pointer;
+  }
 `;
 
 export default NodeCreate;
