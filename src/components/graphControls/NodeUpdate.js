@@ -35,7 +35,7 @@ const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId, saveGraph }) => {
 
   return (
     <FormBox onSubmit={onUpdateNode}>
-      <p>노드 이름: {selectedNodeName}</p>
+      <p>{selectedNodeName}</p>
       <InputBox
         type='text'
         value={nodeId}
@@ -60,10 +60,15 @@ const FormBox = styled.form`
   flex-direction: column;
   align-items: center;
   p {
-    font-weight: bold;
-    margin: 10px 0;
-    width: 194px;
+    border-radius: 3px;
+    background-color: #f6f6f6;
+    box-shadow: inset 0 0 2px #00000040;
+    padding: 6px;
+    margin: 5px 0;
+    width: 180px;
+    min-height: 15px;
     text-align: left;
+    cursor: pointer;
   }
 `;
 

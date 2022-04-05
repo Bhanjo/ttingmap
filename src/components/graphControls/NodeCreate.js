@@ -191,9 +191,8 @@ const FormBox = styled.form`
     background-color: #f6f6f6;
     box-shadow: inset 0 0 2px #00000040;
     padding: 6px;
-    font-weight: bold;
     margin: 5px 0;
-    width: 186px;
+    width: 180px;
     min-height: 15px;
     text-align: left;
     cursor: pointer;
