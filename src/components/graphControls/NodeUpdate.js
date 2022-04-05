@@ -60,6 +60,7 @@ const FormBox = styled.form`
   flex-direction: column;
   align-items: center;
   p {
+    font-weight: bold;
     margin: 10px 0;
     width: 194px;
     text-align: left;
