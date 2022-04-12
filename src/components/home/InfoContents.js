@@ -89,20 +89,20 @@ const InfoContents = () => {
   const projectIntroduce = [
     {
       id: 1,
-      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5, 0.5),
+      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5),
       projectImg: '../img/ex.svg',
       introTitle: '자유롭게 생각을 표현하세요',
     },
     {
       id: 2,
-      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5, 0.5),
-      projectImg: 'https://via.placeholder.com/594x362',
+      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5),
+      projectImg: '../img/autoSave.png',
       introTitle: '작업 중인 내용은 자동으로 저장됩니다',
     },
     {
       id: 3,
-      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5, 0.5),
-      projectImg: 'https://via.placeholder.com/594x362',
+      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5),
+      projectImg: '../img/exportImg.png',
       introTitle: '마인드맵을 이미지로 내보낼 수 있습니다',
     },
     // {
