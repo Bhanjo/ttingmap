@@ -42,21 +42,35 @@ const InfoList = styled.div`
 `;
 
 const InfoItem = styled.div`
-  @media only screen and (max-width: 1190px) {
-    justify-content: center;
-  }
   display: flex;
   flex-wrap: wrap;
   margin: 83px auto;
   overflow: hidden;
+  // 카드가 3장 이상일 때 사용
   :first-child,
   :last-child {
     margin: 0;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #5d5fef;
+    width: 594px;
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  @media only screen and (max-width: 1190px) {
+    justify-content: center;
+    h1 {
+      font-size: 18px;
+    }
   }
 `;
 
 const InfoImg = styled.img`
   width: 594px;
+  /* height: 362px; */
   @media only screen and (max-width: 610px) {
     width: 380px;
   }
@@ -75,28 +89,28 @@ const InfoContents = () => {
   const projectIntroduce = [
     {
       id: 1,
-      animation: useScrollAnimation(isFullSize ? 'left' : 'up', 1.5, 0.5),
-      projectImg: '../svg/ex.svg',
-      introduceText: '자신의 생각을 표현해보세요',
+      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5, 0.5),
+      projectImg: '../img/ex.svg',
+      introTitle: '자유롭게 생각을 표현하세요',
     },
     {
       id: 2,
-      animation: useScrollAnimation(isFullSize ? 'right' : 'up', 1.5, 0.5),
+      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5, 0.5),
       projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '다양한 스타일링',
+      introTitle: '작업 중인 내용은 자동으로 저장됩니다',
     },
     {
       id: 3,
-      animation: useScrollAnimation(isFullSize ? 'left' : 'up', 1.5, 0.5),
+      animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5, 0.5),
       projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '마인드맵을 저장해 공유',
+      introTitle: '마인드맵을 이미지로 내보낼 수 있습니다',
     },
-    {
-      id: 4,
-      animation: useScrollAnimation(isFullSize ? 'right' : 'up', 1.5, 0.5),
-      projectImg: 'https://via.placeholder.com/594x362',
-      introduceText: '간편한 사용',
-    },
+    // {
+    //   id: 4,
+    //   animation: useScrollAnimation(isFullSize ? 'right' : 'up', 1.5, 0.5),
+    //   projectImg: 'https://via.placeholder.com/594x362',
+    //   introTitle: '간편한 사용',
+    // },
   ];
 
   return (
@@ -109,7 +123,7 @@ const InfoContents = () => {
         {projectIntroduce.map((introduce) => (
           <InfoItem {...introduce.animation} key={introduce.id}>
             <InfoImg src={introduce.projectImg} />
-            <p>{introduce.introduceText}</p>
+            <h1>{introduce.introTitle}</h1>
           </InfoItem>
         ))}
       </InfoList>

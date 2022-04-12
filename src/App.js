@@ -27,7 +27,7 @@ const App = () => {
         />
         <meta
           property='og:image'
-          content='https://ttingmap.vercel.app/svg/ogImg.png'
+          content='https://ttingmap.vercel.app/img/ogImg.png'
         />
 
         {/* Twitter */}
@@ -40,7 +40,7 @@ const App = () => {
         />
         <meta
           property='twitter:image'
-          content='https://ttingmap.vercel.app/svg/ogImg.png'
+          content='https://ttingmap.vercel.app/img/ogImg.png'
         />
       </Helmet>
       <Routes>
