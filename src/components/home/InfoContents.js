@@ -30,7 +30,6 @@ const InfoList = styled.div`
     width: 594px;
   }
   @media only screen and (max-width: 610px) {
-    /* width: 450px; */
     width: 380px;
   }
   max-width: 1190px;
@@ -51,19 +50,37 @@ const InfoItem = styled.div`
   :last-child {
     margin: 0;
   }
+  div {
+    width: 45%;
+    margin: 0 20px;
+    /* background-color: cornflowerblue; */
+  }
   h1 {
     font-size: 30px;
     font-weight: bold;
     color: #5d5fef;
-    width: 594px;
     text-align: center;
-    margin-top: 15px;
+    margin: 15px 0;
+  }
+  p {
+    font-size: 18px;
+    width: 80%;
+    word-break: keep-all;
+    margin: 15px auto;
+    line-height: 25px;
   }
 
   @media only screen and (max-width: 1190px) {
     justify-content: center;
+    div {
+      width: 100%;
+      text-align: center;
+    }
     h1 {
       font-size: 18px;
+    }
+    p {
+      width: 100%;
     }
   }
 `;
@@ -92,18 +109,26 @@ const InfoContents = () => {
       animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5),
       projectImg: '../img/ex.svg',
       introTitle: '자유롭게 생각을 표현하세요',
+      introMainDescription: '마인드맵으로 자신의 생각을 간단하게 정리해보세요!',
+      introSubDescription:
+        '간단한 관계도 부터 복잡한 그래프 처리 까지 간단하게 만들 수 있습니다',
     },
     {
       id: 2,
       animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5),
       projectImg: '../img/autoSave.png',
-      introTitle: '작업 중인 내용은 자동으로 저장됩니다',
+      introTitle: '자동 저장을 지원합니다',
+      introMainDescription: '작업 중인 내용은 10초에 한 번씩 자동 저장됩니다!',
+      introSubDescription:
+        '저장을 깜빡잊거나 에러로 인해 작업물이 없어지는 불상사를 방지할 수 있습니다.',
     },
     {
       id: 3,
       animation: useScrollAnimation(isFullSize ? 'up' : 'up', 1.5),
       projectImg: '../img/exportImg.png',
-      introTitle: '마인드맵을 이미지로 내보낼 수 있습니다',
+      introTitle: '이미지로 내보낼 수 있습니다',
+      introMainDescription: '내가 만든 마인드맵을 다른 콘텐츠에 쓰고싶나요?',
+      introSubDescription: 'Export 버튼을 클릭해 이미지로 내보낼 수 있습니다!',
     },
     // {
     //   id: 4,
@@ -123,7 +148,11 @@ const InfoContents = () => {
         {projectIntroduce.map((introduce) => (
           <InfoItem {...introduce.animation} key={introduce.id}>
             <InfoImg src={introduce.projectImg} />
-            <h1>{introduce.introTitle}</h1>
+            <div>
+              <h1>{introduce.introTitle}</h1>
+              <p>{introduce.introMainDescription}</p>
+              <p>{introduce.introSubDescription}</p>
+            </div>
           </InfoItem>
         ))}
       </InfoList>
