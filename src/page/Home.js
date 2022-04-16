@@ -14,7 +14,7 @@ const WelcomContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 100vh;
-  background-image: url('../svg/gradation.svg');
+  background-image: url('../img/gradation.svg');
   background-size: cover;
 `;
 
@@ -76,7 +76,7 @@ const Scroll = styled.img`
 
 // 마인드맵 이동 파트
 const MoveBox = styled.div`
-  background-image: url('../svg/gradation.svg');
+  background-image: url('../img/gradation.svg');
   background-size: cover;
   p {
     color: #fff;
@@ -101,10 +101,10 @@ const Home = () => {
       {/* 로딩시 보여줄 컴포넌트 */}
       <WelcomContainer>
         <BrandBox>
-          <Brand src='../svg/welcomLogo.svg' />
+          <Brand src='../img/welcomLogo.svg' />
           <StartButton to='/mindmap'>START</StartButton>
         </BrandBox>
-        <Scroll src='../svg/scroll.svg' />
+        <Scroll src='../img/scroll.svg' />
       </WelcomContainer>
       {/* 마인드맵 설명 컴포넌트 */}
       <InfoContents />

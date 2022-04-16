@@ -31,7 +31,7 @@ const Contact = () => {
     <ContactContainer>
       <p>Contact</p>
       <a href='https://github.com/Bhanjo' target='_blank' rel='noreferrer'>
-        <ContactGithub src='../svg//github.svg' alt='깃허브링크' />
+        <ContactGithub src='../img/github.svg' alt='깃허브링크' />
       </a>
       <p>배한조</p>
       <p>hanjo1515@naver.com</p>
