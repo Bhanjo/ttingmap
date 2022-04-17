@@ -1,10 +1,11 @@
 /* eslint-disable no-alert */
+import { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 const SaveControl = ({ cyRef }) => {
-  const saveGraph = () => {
+  const saveGraph = useCallback(() => {
     localStorage.setItem('graphs', JSON.stringify(cyRef.current.json()));
-  };
+  }, [cyRef]);
 
   // const loadGraph = () => {
   //   const graph = JSON.parse(localStorage.getItem('graphs'));
@@ -21,6 +22,11 @@ const SaveControl = ({ cyRef }) => {
       localStorage.removeItem('graphs');
     }
   };
+
+  useEffect(() => {
+    // auto save
+    setInterval(saveGraph, 10000);
+  }, [saveGraph]);
 
   return (
     <Container>
