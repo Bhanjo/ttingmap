@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import CytoscapeControl from '../components/CytoscapeControl';
 import Navigation from '../components/Navigation';
+import NodeIdCheck from '../components/NodeIdCheck';
 import { currentNodeId } from '../components/globalState/nodeControl';
 
 const Container = styled.div`
@@ -125,10 +126,7 @@ const MindMap = () => {
     const graph = JSON.parse(localStorage.getItem('graphs'));
     if (graph) {
       cyRef.current.json(graph);
-      // 노드 id 업데이트
-      const lastNodeIndex = cyRef.current.elements().length - 1;
-      const lastNode = cyRef.current.elements()[lastNodeIndex];
-      setNodeCnt(Number(lastNode.data('id')) + 1);
+      NodeIdCheck(cyRef, setNodeCnt);
     }
   }, [setNodeCnt]);
 

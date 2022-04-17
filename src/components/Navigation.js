@@ -29,7 +29,7 @@ const Navigarion = () => {
   return (
     <NavContainer>
       <NavElement to='/'>
-        <LogoImg src='../svg/NavLogo.svg' alt='메인페이지' />
+        <LogoImg src='../img/NavLogo.svg' alt='메인페이지' />
       </NavElement>
       <div>
         <NavElement to='/mindmap'>마인드맵</NavElement>
