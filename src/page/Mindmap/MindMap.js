@@ -4,10 +4,11 @@ import CytoscapeComponent from 'react-cytoscapejs';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import CytoscapeControl from '../components/CytoscapeControl';
-import Navigation from '../components/Navigation';
-import NodeIdCheck from '../components/NodeIdCheck';
-import { currentNodeId } from '../components/globalState/nodeControl';
+import Navigation from '../../components/Navigation';
+import { currentNodeId } from '../../components/globalState/nodeControl';
+
+import CytoscapeControl from './Components/Controller/CytoscapeControl';
+import NodeIdCheck from './Components/NodeIdCheck';
 
 const Container = styled.div`
   height: 100vh;
@@ -46,25 +47,6 @@ const MindMap = () => {
       //     y: 360,
       //   },
       // },
-      // {
-      //   data: {
-      //     id: '3',
-      //     label: '노드3',
-      //   },
-      //   position: {
-      //     x: 140,
-      //     y: 360,
-      //   },
-      // },
-      // {
-      //   data: {
-      //     id: '4',
-      //     label: '노드4',
-      //   },
-      //   position: {
-      //     x: 240,
-      //     y: 360,
-      //   },
       // },
     ],
     edges: [
@@ -72,20 +54,6 @@ const MindMap = () => {
       //   data: {
       //     source: '1',
       //     target: '2',
-      //     label: 'edge from node1 to node3',
-      //   },
-      // },
-      // {
-      //   data: {
-      //     source: '1',
-      //     target: '3',
-      //     label: 'edge from node1 to node3',
-      //   },
-      // },
-      // {
-      //   data: {
-      //     source: '1',
-      //     target: '4',
       //     label: 'edge from node1 to node3',
       //   },
       // },

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import Home from './page/Home';
-import MindMap from './page/MindMap';
+import MindMap from './page/Mindmap/MindMap';
 
 const App = () => {
   return (

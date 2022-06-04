@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import SubmitButton from '../SubmitButton';
+import SubmitButton from '../../../../../components/SubmitButton';
 
 const ExportView = ({ cyRef }) => {
   const [exportLink, setExportLink] = useState(false);
