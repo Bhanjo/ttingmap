@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import useScrollAnimation from '../../hooks/useScrollAnimation';
+import useScrollAnimation from '../../../hooks/useScrollAnimation';
 
 const InfoBox = styled.div`
   background-color: #fff;
