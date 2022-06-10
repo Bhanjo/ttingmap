@@ -2,8 +2,8 @@ import { Helmet } from 'react-helmet';
 import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
-import Home from './page/Home';
-import MindMap from './page/MindMap';
+import Home from './page/Home/Home';
+import MindMap from './page/Mindmap/MindMap';
 
 const App = () => {
   return (

@@ -2,8 +2,8 @@
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
-import Contact from '../components/home/Contact';
-import InfoContents from '../components/home/InfoContents';
+import Contact from './Components/Contact';
+import InfoContents from './Components/InfoContents';
 
 // 첫 로딩시 보여줄 화면
 const WelcomContainer = styled.div`

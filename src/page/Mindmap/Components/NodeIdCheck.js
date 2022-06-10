@@ -6,8 +6,8 @@ const NodeIdCheck = (cyRef, setUpdateNodeId) => {
     return true;
   };
 
-  const lastNodeIndex = cyRef.current.elements().length - 1;
-  const lastNode = cyRef.current.elements()[lastNodeIndex];
+  const lastNodeIndex = cyRef.current.elements('node').length - 1;
+  const lastNode = cyRef.current.elements('node')[lastNodeIndex];
   if (isDataExist(lastNode)) setUpdateNodeId(Number(lastNode.data('id')) + 1);
   else setUpdateNodeId(0);
 };
