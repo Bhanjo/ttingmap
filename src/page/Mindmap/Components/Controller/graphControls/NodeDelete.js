@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import InputBox from '../InputBox';
-import NodeEdgeChange from '../NodeEdgeChange';
-import NodeIdCheck from '../NodeIdCheck';
-import SubmitButton from '../SubmitButton';
-import { isModeNode, currentNodeId } from '../globalState/nodeControl';
+import InputBox from '../../../../../components/InputBox';
+import SubmitButton from '../../../../../components/SubmitButton';
+import {
+  isModeNode,
+  currentNodeId,
+} from '../../../../../components/globalState/nodeControl';
+import NodeEdgeChange from '../../NodeEdgeChange';
+import NodeIdCheck from '../../NodeIdCheck';
 
 const NodeDelete = ({
   cyRef,

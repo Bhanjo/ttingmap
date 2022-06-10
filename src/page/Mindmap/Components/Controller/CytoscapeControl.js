@@ -7,7 +7,8 @@ import {
   nodeInputState,
   targetNodeInputState,
   isModeNode,
-} from './globalState/nodeControl';
+} from '../../../../components/globalState/nodeControl';
+
 import ExportView from './graphControls/ExportView';
 import NodeCreate from './graphControls/NodeCreate';
 import NodeDelete from './graphControls/NodeDelete';

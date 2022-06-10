@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { isModeNode } from './globalState/nodeControl';
+import { isModeNode } from '../../../components/globalState/nodeControl';
 
 const Container = styled.div`
   justify-content: center;

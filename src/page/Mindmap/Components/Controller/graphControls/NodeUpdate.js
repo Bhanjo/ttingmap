@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import InputBox from '../InputBox';
-import SubmitButton from '../SubmitButton';
+import InputBox from '../../../../../components/InputBox';
+import SubmitButton from '../../../../../components/SubmitButton';
 
 const NodeUpdate = ({ cyRef, nodeId, onChangeNodeId, saveGraph }) => {
   const [updateName, setUpdateName] = useState('');
